@@ -38,7 +38,7 @@ def loop(player, lista):
                 sounds.play_sound("click.wav")
                 window_warning = layout_play_game.warning()
                 event, values = window_warning.read()
-                if event == "SI":
+                if event == "SI ":
                     write_csv("fin", play_data, "abandonada")
                     window_warning.close()
                     window.close()
