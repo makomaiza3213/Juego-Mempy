@@ -2,10 +2,12 @@ import PySimpleGUI as sg
 
 
 def warning():
+    frame_yes_no = [[sg.Button("SI ", font=("Helvetica", 12), border_width=5), sg.Button("NO", font=("Helvetica", 12), border_width=5)]]
     layout = [
-        [sg.Text("¿Seguro que desea salir?")],
-        [sg.Button("SI"), sg.Button("NO")]]
-    window = sg.Window("ADVERTENCIA", layout, margins=(50, 50))
+        [sg.Text("¿SEGURO QUE QUIERES SALIR?", font=("Helvetica", 15))],
+        [sg.Frame("", frame_yes_no, element_justification="center")]]
+    frame_warning = [[sg.Frame("", layout, element_justification="center")]]
+    window = sg.Window("ADVERTENCIA", frame_warning, margins=(50, 50))
     return window
 
 
