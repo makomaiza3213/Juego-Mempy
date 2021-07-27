@@ -5,7 +5,7 @@
             "y": 2
         },
         "coincidencias": 2,
-        "tiempo_juego": 1
+        "tiempo_juego": 0
     },
     "level2": {
         "dimensiones": {
@@ -13,7 +13,7 @@
             "y": 2
         },
         "coincidencias": 2,
-        "tiempo_juego": 2
+        "tiempo_juego": 0
     },
     "level3": {
         "dimensiones": {
@@ -21,7 +21,7 @@
             "y": 2
         },
         "coincidencias": 2,
-        "tiempo_juego": 3
+        "tiempo_juego": 0
     },
     "level4": {
         "dimensiones": {
