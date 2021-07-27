@@ -14,12 +14,11 @@ def loop():
     """
     window = layout.login()
     event, values = window.read()
-    if event == "Entrar":
+    if event == "ENTRAR":
         sounds.play_sound('click.wav')
         if os.path.exists("usuarios.json"):
             usuario = lg.buscar(values['-USERNAME-'])
             if usuario:
-                sg.popup("Bienvenido")
                 player = class_player.Player(usuario)
                 lista = sl.values_hour_day()
                 file_scores(player)  # crea el archivo para puntuaciones
@@ -34,7 +33,7 @@ def loop():
             window.close()
             new_user.start()
 
-    if event == "Registrate":
+    if event == "REGISTRATE":
         sounds.play_sound('click.wav')
         window.close()
         new_user.start()
