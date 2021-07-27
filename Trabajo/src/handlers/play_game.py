@@ -13,7 +13,19 @@ def pre_initializations_for_the_component(player, lista):
     list_elements = board_elements(player, lista)
     found_list = []
     nivel = player.nivel_actual
-    sec, min = 60, player.nivel['tiempo_juego'] - 1  # sec y min , controlan el temporizador
+    sec = 0  # sec y min , controlan el temporizador
+    if player.nivel['tiempo_juego'] != 0:
+        min = player.nivel['tiempo_juego'] - 1
+        sec = 60
+    else:
+        if player.nivel['tiempo_juego'] == 0:
+            min = player.nivel['tiempo_juego']
+            if nivel == "1":
+                sec = 20
+            elif nivel == "2":
+                sec = 15
+            elif nivel == "3":
+                sec = 10
     fin = 0
     timer_running = False
     first_touch, second_touch, three_touch, list_elems_touch = None, None, None, []
