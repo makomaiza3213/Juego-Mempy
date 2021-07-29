@@ -8,7 +8,7 @@ def login():
     sg.theme('DarkAmber')
     layout_column = [[sg.Text("INGRESAR", size=(8, 1), font=("Fixedsys", 20))],
                      [sg.Text('USUARIO', font=("Fixedsys", 15))],
-                     [sg.InputText(size=(15, 1), font='Default 12', key='-USERNAME-')],
+                     [sg.InputText(size=(15, 1), font=("Fixedsys", 12), key='-USERNAME-')],
                      [sg.Button('ENTRAR', size=(10, 1), font=("Fixedsys", 12), border_width=5)],
                      [sg.Text("", size=(0, 1))],
                      [sg.Text('¿ERES NUEVO?', font=("Fixedsys", 20))],
