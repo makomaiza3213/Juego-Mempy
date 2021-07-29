@@ -5,7 +5,6 @@ def open_sign_up():
     """
         diseño de la ventana de Registro de un jugador
     """
-    # prueba de commit pycharm
     sg.theme('DarkAmber')
     Sign_layout = [[sg.Text('Ingresa tus datos', font=("Fixedsys", 30))],
                    [sg.Text('Nick', font=("Fixedsys", 18)),
