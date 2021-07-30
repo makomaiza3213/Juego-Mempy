@@ -107,7 +107,7 @@ def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_co
             player.puntaje_0 = 0
             player.attempt_ok_0 = 0
             player.attempt_error_0 = 0
-            sg.popup(player.msj_victoria)
+            sg.popup(player.msj_victoria, font=('Fixedsys', 15))
     return list_elems_touch, fin, list_elements, timer_running
 
 
