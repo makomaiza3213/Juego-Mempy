@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 from src.windows import layout_statistics as layout
-from src.component.statistics import top_10, games_state, game_by_gender ,average_time
+from src.handlers.handlers_statistics import top_10, games_state, game_by_gender, average_time
 from src.handlers import sounds
 
 
