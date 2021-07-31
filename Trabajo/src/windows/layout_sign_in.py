@@ -1,14 +1,18 @@
 import PySimpleGUI as sg
 
+from src.handlers.images import open_image
+
 
 def login():
     """
         diseño de la ventana de inicio de la aplicacion ,para inicio de Sesion y registro
     """
     sg.theme('DarkAmber')
+    logo = open_image("mempy image logo 2.0.png")
     layout_column = [
                      # [sg.Text("", font=("Fixedsys", 50))],
-                     [sg.Image("C:/Users/makom/Desktop/Facu 2021/PYTHON/Juego Mempy/Trabajo/src/images/mempy image logo 2.0.png")],
+                     # [sg.Image("C:/Users/makom/Desktop/Facu 2021/PYTHON/Juego Mempy/Trabajo/src/images/mempy image logo 2.0.png")],
+                     [sg.Image(logo)],
                      [sg.Text("INGRESAR", size=(8, 1), font=("Fixedsys", 20))],
                      [sg.Text('USUARIO', font=("Fixedsys", 15))],
                      [sg.InputText(size=(15, 1), font=("Fixedsys", 12), key='-USERNAME-')],

@@ -13,6 +13,7 @@ def loop():
         capta los eventos y los valores de entrada para su procesamiento y posterior redirigido correcto
     """
     window = layout.login()
+    sounds.play_sound('game music.wav')
     event, values = window.read()
     if event == "ENTRAR":
         sounds.play_sound('click.wav')

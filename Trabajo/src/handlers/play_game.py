@@ -28,10 +28,11 @@ def pre_initializations_for_the_component(player, lista):
                 sec = 10
     fin = 0
     timer_running = False
-    first_touch, second_touch, three_touch, list_elems_touch = None, None, None, []
+    list_touchs = [None, None, None]
+    list_elems_touch = []
     cant = int(((list_elements[0] * list_elements[1]) / player.nivel['coincidencias']))
     play_data = [1, cant, player.nick, player.genero, player.edad, nivel]
-    return lista, min_cont, sec_cont, time_cont, list_elements, found_list, sec, min, fin, timer_running, first_touch, second_touch, three_touch, list_elems_touch, cant, play_data
+    return lista, min_cont, sec_cont, time_cont, list_elements, found_list, sec, min, fin, timer_running, list_touchs, list_elems_touch, cant, play_data
 
 
 def previous_functionalities_starting_a_game(player, matriz, window, play_data, timer_running):
@@ -239,48 +240,59 @@ def board_elements(player, lista):
     return [filas, columnas, nivel, lista, num]
 
 
-def two_touchs(tupla, window, fin, min, sec, first_touch, second_touch, const, found_list, player):
-    if first_touch is None:
-        first_touch = (tupla[0], tupla[1], tupla[2])
+def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_list, player):
+    if list_touchs[0] is None:
+        list_touchs[0] = (tupla[0], tupla[1], tupla[2])
         write_csv("intento_Error", const, "Error", tupla[2])
-    elif second_touch is None:
-        second_touch = (tupla[0], tupla[1], tupla[2])
+    elif list_touchs[1] is None:
+        list_touchs[1] = (tupla[0], tupla[1], tupla[2])
+    elif player.nivel['coincidencias'] == 3:
+        if list_touchs[2] is None:
+            list_touchs[2] = (tupla[0], tupla[1], tupla[2])
 
-    if first_touch is not None and second_touch is not None:
-        if first_touch[2] not in found_list and second_touch[2] not in found_list:
-            if first_touch != second_touch:
-                if first_touch[2] == second_touch[2]:
+    if (list_touchs[0] is not None and list_touchs[1] is not None and list_touchs[2] is not None) or (list_touchs[0] is not None and list_touchs[1] is not None):
+        if (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list and list_touchs[2][2] not in found_list) or (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list):
+            if (list_touchs[0] != list_touchs[1]) and (list_touchs[1] != list_touchs[2] and list_touchs[0] != list_touchs[2]) or (list_touchs[0] != list_touchs[1]) and (list_touchs[1] != list_touchs[2]):
+                if (list_touchs[0][2] == list_touchs[1][2] == list_touchs[2][2]) or (list_touchs[0][2] == list_touchs[1][2]):
                     sounds.play_sound("pickup.wav")
                     write_csv("intento_Ok", const, "Ok", tupla[2])
                     fin += 1
-                    found_list.append(first_touch[2])
-                    first_touch = None
-                    second_touch = None
+                    found_list.append(list_touchs[0][2])
                     player.attempt_ok += 1
+                    list_touchs[0] = None
+                    list_touchs[1] = None
+                    list_touchs[2] = None
                 else:
                     sounds.play_sound("broken.wav")
                     write_csv("intento_Error", const, "Error", tupla[2])
                     time.sleep(1)
                     sec -= 1
                     player.attempt_error += 1
-                    # window[(fila, colum, value)].update(image_filename=os.path.join("image", value))
                     # window[first_touch].update(image_filename= 'question.png')
                     # window[second_touch].update(image_filename= 'question.png')
-
-                    window[first_touch].update('?')  # , image_filename=None
-                    window[second_touch].update('?')  # , image_filename=None
-                    first_touch = None
-                    second_touch = None
-                    window.refresh()
+                    window[list_touchs[0]].update('?')
+                    window[list_touchs[1]].update('?')
+                    window[list_touchs[2]].update('?')
+                    list_touchs[0] = None
+                    list_touchs[1] = None
+                    list_touchs[2] = None
             else:
-                second_touch = None
-        elif first_touch[2] in found_list:
-            first_touch = None
-        elif second_touch[2] in found_list:
-            second_touch = None
-    return [fin, min, sec, first_touch, second_touch, found_list]
+                if list_touchs[0] == list_touchs[1]:
+                    list_touchs[1] = None
+                elif list_touchs[1] == list_touchs[2]:
+                    list_touchs[2] = None
+                elif (list_touchs[0] != list_touchs[1]) and list_touchs[0] == list_touchs[2]:
+                    list_touchs[2] = None
+        elif list_touchs[0][2] in found_list:
+            list_touchs[0] = None
+        elif list_touchs[1][2] in found_list:
+            list_touchs[1] = None
+        elif list_touchs[2][2] in found_list:
+            list_touchs[2] = None
+    return [fin, min, sec, list_touchs]
 
 
+"""
 def three_touchs(tupla, window, fin, min, sec, first_touch, second_touch, three_touch, const, found_list, player):
     if first_touch is None:
         first_touch = (tupla[0], tupla[1], tupla[2])
@@ -330,4 +342,4 @@ def three_touchs(tupla, window, fin, min, sec, first_touch, second_touch, three_
             second_touch = None
         elif three_touch[2] in found_list:
             three_touch = None
-    return [fin, min, sec, first_touch, second_touch, three_touch]
+    return [fin, min, sec, first_touch, second_touch, three_touch]"""
