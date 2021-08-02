@@ -250,10 +250,10 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
         if list_touchs[2] is None:
             list_touchs[2] = (tupla[0], tupla[1], tupla[2])
 
-    if (list_touchs[0] is not None and list_touchs[1] is not None and list_touchs[2] is not None) or (list_touchs[0] is not None and list_touchs[1] is not None):
-        if (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list and list_touchs[2][2] not in found_list) or (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list):
+    if (list_touchs[0] is not None and list_touchs[1] is not None and list_touchs[2] is not None) or (list_touchs[0] is not None and list_touchs[1] is not None and player.nivel["coincidencias"] == 2):
+        if (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list) or (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list and list_touchs[2][2] not in found_list):
             if (list_touchs[0] != list_touchs[1]) and (list_touchs[1] != list_touchs[2] and list_touchs[0] != list_touchs[2]) or (list_touchs[0] != list_touchs[1]) and (list_touchs[1] != list_touchs[2]):
-                if (list_touchs[0][2] == list_touchs[1][2] == list_touchs[2][2]) or (list_touchs[0][2] == list_touchs[1][2]):
+                if (list_touchs[0][2] == list_touchs[1][2] and player.nivel["coincidencias"] == 2) or (list_touchs[0][2] == list_touchs[1][2] == list_touchs[2][2] and player.nivel["coincidencias"] == 3):
                     sounds.play_sound("pickup.wav")
                     write_csv("intento_Ok", const, "Ok", tupla[2])
                     fin += 1
@@ -272,7 +272,8 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
                     # window[second_touch].update(image_filename= 'question.png')
                     window[list_touchs[0]].update('?')
                     window[list_touchs[1]].update('?')
-                    window[list_touchs[2]].update('?')
+                    if player.nivel["coincidencias"] == 3:
+                        window[list_touchs[2]].update('?')
                     list_touchs[0] = None
                     list_touchs[1] = None
                     list_touchs[2] = None
@@ -290,56 +291,3 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
         elif list_touchs[2][2] in found_list:
             list_touchs[2] = None
     return [fin, min, sec, list_touchs]
-
-
-"""
-def three_touchs(tupla, window, fin, min, sec, first_touch, second_touch, three_touch, const, found_list, player):
-    if first_touch is None:
-        first_touch = (tupla[0], tupla[1], tupla[2])
-        write_csv("intento_Error", const, "Error", tupla[2])
-    elif second_touch is None:
-        second_touch = (tupla[0], tupla[1], tupla[2])
-        write_csv("intento_Error", const, "Error", tupla[2])
-    elif three_touch is None:
-        three_touch = (tupla[0], tupla[1], tupla[2])
-
-    if first_touch is not None and second_touch is not None and three_touch is not None:
-        if first_touch[2] not in found_list and second_touch[2] not in found_list and three_touch[2] not in found_list:
-            if (first_touch != second_touch) and (second_touch != three_touch) and (first_touch != three_touch):
-                if first_touch[2] == second_touch[2] == three_touch[2]:
-                    sounds.play_sound("pickup.wav")
-                    write_csv("intento_Ok", const, "Ok", tupla[2])
-                    fin += 1
-                    found_list.append(first_touch[2])
-                    player.attempt_ok += 1
-                    first_touch = None
-                    second_touch = None
-                    three_touch = None
-                else:
-                    sounds.play_sound("broken.wav")
-                    write_csv("intento_Error", const, "Error", tupla[2])
-                    time.sleep(1)
-                    sec -= 1
-                    player.attempt_error += 1
-                    # window[first_touch].update(image_filename= 'question.png')
-                    # window[second_touch].update(image_filename= 'question.png')
-                    window[first_touch].update('?')
-                    window[second_touch].update('?')
-                    window[three_touch].update('?')
-                    first_touch = None
-                    second_touch = None
-                    three_touch = None
-            else:
-                if first_touch == second_touch:
-                    second_touch = None
-                elif second_touch == three_touch:
-                    three_touch = None
-                elif (first_touch != second_touch) and first_touch == three_touch:
-                    three_touch = None
-        elif first_touch[2] in found_list:
-            first_touch = None
-        elif second_touch[2] in found_list:
-            second_touch = None
-        elif three_touch[2] in found_list:
-            three_touch = None
-    return [fin, min, sec, first_touch, second_touch, three_touch]"""
