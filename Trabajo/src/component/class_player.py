@@ -6,15 +6,11 @@ class Player:
         self._genero = usuario["genero"]
         self._nivel_actual = str(usuario["configuracion"]["nivel_actual"])
         self._nivel = usuario["configuracion"]["level" + self._nivel_actual]
-        #self._nivel_config_x=2
-        #self._nivel_4 = usuario["configuracion"]["level4"]
         self._msj_victoria = usuario["configuracion"]["msj_victoria"]
         self._msj_derrota = usuario["configuracion"]["msj_derrota"]
         self._msj_tiempo = usuario["configuracion"]["msj_tiempo"]
         self._tema = usuario["configuracion"]["tema"]
         self._puntaje = 0
-        self._attempt_ok = 0
-        self._attempt_error = 0
 
     @property
     def nick(self):
@@ -56,13 +52,6 @@ class Player:
     def nivel(self, nuevo_nivel, usuario):
         self._nivel = usuario["configuracion"]["level" + self.nuevo_nivel]
 
-    # @property
-    # def nivel_4(self):
-    #     return self._nivel_4
-
-    # @nivel_4.setter
-    # def nivel_4(self, nivel_4):
-    #     self._nivel_4 = nivel_4
 
     @property
     def msj_victoria(self):
@@ -108,26 +97,3 @@ class Player:
     def puntaje_0(self, nuevo_puntaje):
         self._puntaje = nuevo_puntaje   
 
-    @property
-    def attempt_ok(self):
-        return self._attempt_ok
-
-    @attempt_ok.setter
-    def attempt_ok(self, new_attempt):
-        self._attempt_ok += new_attempt
-
-    @attempt_ok.setter
-    def attempt_ok_0(self, new_attempt):
-        self._attempt_ok = new_attempt    
-
-    @property
-    def attempt_error(self):
-        return self._attempt_error
-
-    @attempt_error.setter
-    def attempt_error(self, new_attempt):
-        self._attempt_error += new_attempt
-
-    @attempt_error.setter
-    def attempt_error_0(self, new_attempt):
-        self._attempt_error = new_attempt    

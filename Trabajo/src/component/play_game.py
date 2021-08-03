@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from src.component.write import write_csv
 from src.handlers.play_game import \
     previous_functionalities_starting_a_game, pre_initializations_for_the_component, playtime_features, verify_winner, \
-    touch_controller, update_score_by_game
+    touch_controller
 from src.handlers import sounds
 from src.windows import layout_play_game
 
@@ -66,7 +66,6 @@ def loop(player, lista):
                 break
 
             window["-HITS-"].update(str(fin) + "/" + str(list_elements[4]))
-
 
             list_elems_touch, fin, list_elements, timer_running = verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_cont, timer_running, play_data)
             if not timer_running:

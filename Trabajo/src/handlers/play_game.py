@@ -102,7 +102,6 @@ def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_co
         if fin == list_elements[4]:  # comprobar si ganaste
             timer_running = False
             sounds.play_sound('victory.wav')
-            #score(player, sec_cont, min_cont)
             write_csv("fin", play_data, "finalizada", "", player.puntaje)
             update_scores(player)
             player.puntaje_0 = 0
@@ -179,118 +178,6 @@ def update_score_by_game(player, sec, min):
         if sec in rango:
             player.puntaje = pts
 
-
-
-
-""" 
-def score_level_1(player, sec, pje_time, pje_attempt):
-    if 5 <= sec <= 15:
-        player.puntaje = pje_time
-        if player.attempt_ok > player.attempt_error:
-            player.puntaje = pje_attempt
-    elif 16 <= sec <= 30:
-        player.puntaje = pje_time - 20
-        if player.attempt_ok > player.attempt_error:
-            player.puntaje = pje_attempt
-    elif 31 <= sec <= 45:
-        player.puntaje = pje_time - 40
-        if player.attempt_ok > player.attempt_error:
-            player.puntaje = pje_attempt
-    else:
-        player.puntaje = pje_time - 70
-        if player.attempt_ok > player.attempt_error:
-            player.puntaje = pje_attempt
-"""
-"""
-def score_level_2(player, sec, min, pje_time, pje_attempt):
-    if min == 0:
-        if 5 <= sec <= 30:
-            player.puntaje = pje_time
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-        elif 31 <= sec <= 60:
-            player.puntaje = pje_time - 40
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-
-    else:
-        if 0 <= sec <= 30:
-            player.puntaje = pje_time - 80
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-        elif 31 <= sec <= 60:
-            player.puntaje = pje_time - 130
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-
-
-def score_level_3(player, sec, min, pje_time, pje_attempt):
-    if min == 0:
-        if 5 <= sec <= 30:
-            player.puntaje = pje_time
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-        elif 31 <= sec <= 60:
-            player.puntaje = pje_time - 50
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-    elif min == 1:
-        if 0 <= sec <= 30:
-            player.puntaje = pje_time - 100
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-        elif 31 <= sec <= 60:
-            player.puntaje = pje_time - 150
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-    else:
-        if 0 <= sec <= 30:
-            player.puntaje = pje_time - 175
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-        elif 31 <= sec <= 60:
-            player.puntaje = pje_time - 190
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-
-
-def score_level_4(player, sec, min, pje_time, pje_attempt):
-    if min == 0:
-        if sec <= 59:
-            player.puntaje = pje_time
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-    elif min == 1:
-        if 0 <= sec <= 30:
-            player.puntaje = pje_time - 100  # 250
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-        elif 31 <= sec <= 60:
-            player.puntaje = pje_time - 150  # 200
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-    elif min == 2:
-        if 0 <= sec <= 30:
-            player.puntaje = pje_time - 200  # 150
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-        elif 31 <= sec <= 60:
-            player.puntaje = pje_time - 300  # 50
-            if player.attempt_ok > player.attempt_error:
-                player.puntaje = pje_attempt
-
-
-def score(player, sec, min):
-    if player.nivel_actual == "1":
-        score_level_1(player, sec, pje_time=80, pje_attempt=20)
-    elif player.nivel_actual == "2":
-        score_level_2(player, sec, min, pje_time=160, pje_attempt=40)
-    elif player.nivel_actual == "3":
-        score_level_3(player, sec, min, pje_time=250, pje_attempt=50)
-    else:
-        if player.nivel_actual == "4":
-            score_level_4(player, sec, min, pje_time=350, pje_attempt=50)
-"""
 
 def board_elements(player, lista):
     """
