@@ -102,7 +102,7 @@ def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_co
         if fin == list_elements[4]:  # comprobar si ganaste
             timer_running = False
             sounds.play_sound('victory.wav')
-            score(player, sec_cont, min_cont)
+            #score(player, sec_cont, min_cont)
             write_csv("fin", play_data, "finalizada", "", player.puntaje)
             update_scores(player)
             player.puntaje_0 = 0
@@ -112,6 +112,77 @@ def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_co
     return list_elems_touch, fin, list_elements, timer_running
 
 
+def update_score_by_game(player, sec, min):
+
+    points = {"1": {
+                            range(0, 3): 50,
+                            range(4, 6): 50,
+                            range(7, 10): 40,
+                            range(11, 14): 30,
+                            range(15, 18): 20,
+                            range(19, 20): 10
+                        },
+             "2":{
+                            range(0, 3): 70,
+                            range(4, 6): 70,
+                            range(7, 10): 60,
+                            range(11, 15): 50,
+             },
+             "3":{
+                            range(0, 2): 75,
+                            range(3, 5): 75,
+                            range(6, 8): 75,
+                            range(9, 10): 75,
+             },
+             "4": {
+                        0: {
+                            range(0, 5): 200,
+                            range(6, 11): 100,
+                            range(12, 16): 100,
+                            range(17, 25): 100,
+                            range(25, 30): 100,
+                            range(31, 36): 100,
+                            range(37, 44): 100,
+                            range(45, 50): 100,
+                            range(51, 60): 100,
+                        },
+                        1: {
+                            range(0, 5): 100,
+                            range(6, 11): 75,
+                            range(12, 16): 75,
+                            range(17, 25): 75,
+                            range(25, 30): 75,
+                            range(31, 36): 75,
+                            range(37, 44): 75,
+                            range(45, 50): 75,
+                            range(51, 60): 75
+                        },
+                        2: {
+                            range(0, 5): 50,
+                            range(6, 11): 25,
+                            range(12, 16): 25,
+                            range(17, 25): 25,
+                            range(25, 30): 25,
+                            range(31, 36): 25,
+                            range(37, 44): 25,
+                            range(45, 50): 25,
+                            range(51, 60): 25
+                        }
+             },
+    }
+
+    if player.nivel_actual == 4:
+        list_points = points[player.nivel_actual][min]
+    else:
+        list_points = points[player.nivel_actual]
+    for rango, pts in list_points.items():
+        if sec in rango:
+            player.puntaje = pts
+
+
+
+
+""" 
 def score_level_1(player, sec, pje_time, pje_attempt):
     if 5 <= sec <= 15:
         player.puntaje = pje_time
@@ -129,8 +200,8 @@ def score_level_1(player, sec, pje_time, pje_attempt):
         player.puntaje = pje_time - 70
         if player.attempt_ok > player.attempt_error:
             player.puntaje = pje_attempt
-
-
+"""
+"""
 def score_level_2(player, sec, min, pje_time, pje_attempt):
     if min == 0:
         if 5 <= sec <= 30:
@@ -219,7 +290,7 @@ def score(player, sec, min):
     else:
         if player.nivel_actual == "4":
             score_level_4(player, sec, min, pje_time=350, pje_attempt=50)
-
+"""
 
 def board_elements(player, lista):
     """
@@ -240,7 +311,7 @@ def board_elements(player, lista):
     return [filas, columnas, nivel, lista, num]
 
 
-def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_list, player):
+def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_list, player, sec_cont, min_cont):
     if list_touchs[0] is None:
         list_touchs[0] = (tupla[0], tupla[1], tupla[2])
         write_csv("intento_Error", const, "Error", tupla[2])
@@ -259,6 +330,8 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
                     fin += 1
                     found_list.append(list_touchs[0][2])
                     player.attempt_ok += 1
+                    update_score_by_game(player, sec_cont, min_cont)
+                    window["-POINTS-"].update(f"PUNTOS {str(player.puntaje)}")
                     list_touchs[0] = None
                     list_touchs[1] = None
                     list_touchs[2] = None

@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
 from src.component.write import write_csv
-from src.handlers.play_game import score, \
+from src.handlers.play_game import \
     previous_functionalities_starting_a_game, pre_initializations_for_the_component, playtime_features, verify_winner, \
-    touch_controller
+    touch_controller, update_score_by_game
 from src.handlers import sounds
 from src.windows import layout_play_game
 
@@ -55,31 +55,18 @@ def loop(player, lista):
                 # window[(fila, colum, data)].update(image_filename=os.path.join(fileDir, "src", "images", data))
 
                 window.refresh()
-                list_elems_touch = touch_controller((fila, colum, data), window, fin, min, sec, list_touchs, play_data, found_list, player)
+                list_elems_touch = touch_controller((fila, colum, data), window, fin, min, sec, list_touchs, play_data, found_list, player, sec_cont, min_cont)
                 list_touchs[0] = list_elems_touch[3][0]
                 list_touchs[1] = list_elems_touch[3][1]
                 list_touchs[2] = list_elems_touch[3][2]
                 fin = list_elems_touch[0]
-                """if player.nivel['coincidencias'] == 2:
-                    list_elems_touch = two_touchs((fila, colum, data), window, fin, min, sec, first_touch, second_touch,
-                                                  play_data, found_list, player)
-                    first_touch = list_elems_touch[3]
-                    second_touch = list_elems_touch[4]
-                    fin = list_elems_touch[0]
-                else:
-                    list_elems_touch = three_touchs((fila, colum, data), window, fin, min, sec, first_touch,
-                                                    second_touch,
-                                                    three_touch, play_data, found_list, player)
-                    first_touch = list_elems_touch[3]
-                    second_touch = list_elems_touch[4]
-                    three_touch = list_elems_touch[5]
-                    fin = list_elems_touch[0]"""
 
             timer_running, min, sec, sec_cont, min_cont, play_data = playtime_features(timer_running, window, min, sec, sec_cont, min_cont, play_data, player)
             if not timer_running:
                 break
 
             window["-HITS-"].update(str(fin) + "/" + str(list_elements[4]))
+
 
             list_elems_touch, fin, list_elements, timer_running = verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_cont, timer_running, play_data)
             if not timer_running:
