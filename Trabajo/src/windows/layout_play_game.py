@@ -45,7 +45,7 @@ def layout_level(player, filas, columnas, lista, aciertos):
                 sg.Button('SALIR', size=(8, 0), font=('Fixedsys', 15), border_width=4, button_color=list_buttons_colors[player.tema])],
                [sg.Text(" ", size=(8, 0), font=('Fixedsys', 20), key="-TIMER1-")],
                [sg.Text("", size=(8, 0), font=('Fixedsys', 22), text_color="red", key="-ALERTIME-")],
-               [sg.Text("PUNTOS 0", size=(20, 0), font=("Fixedsys", 15), key="-POINTS-")]]
+               [sg.Text(f"✩{player.puntaje}", size=(20, 0), font=("Fixedsys", 25), key="-POINTS-")]]
 
     window = sg.Window(player.nick, layout, margins=(200, 150))
     return window, matriz

@@ -44,9 +44,7 @@ def previous_functionalities_starting_a_game(player, matriz, window, play_data, 
     timer_running = True
     create_csv(play_data)
     write_csv("inicio_partida", play_data)
-    player.puntaje = 0
-    player.attempt_ok = 0
-    player.attempt_error = 0
+    player.puntaje_0 = 0
     return play_data, timer_running
 
 
@@ -105,8 +103,6 @@ def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_co
             write_csv("fin", play_data, "finalizada", "", player.puntaje)
             update_scores(player)
             player.puntaje_0 = 0
-            player.attempt_ok_0 = 0
-            player.attempt_error_0 = 0
             sg.popup(player.msj_victoria, font=('Fixedsys', 15))
     return list_elems_touch, fin, list_elements, timer_running
 
@@ -115,57 +111,57 @@ def update_score_by_game(player, sec, min):
 
     points = {"1": {
                             range(0, 3): 50,
-                            range(4, 6): 50,
-                            range(7, 10): 40,
-                            range(11, 14): 30,
-                            range(15, 18): 20,
-                            range(19, 20): 10
+                            range(3, 6): 50,
+                            range(6, 10): 40,
+                            range(10, 14): 30,
+                            range(14, 18): 20,
+                            range(18, 20): 10
                         },
              "2":{
                             range(0, 3): 70,
-                            range(4, 6): 70,
-                            range(7, 10): 60,
-                            range(11, 15): 50,
+                            range(3, 6): 70,
+                            range(6, 10): 60,
+                            range(10, 15): 50,
              },
              "3":{
                             range(0, 2): 75,
-                            range(3, 5): 75,
-                            range(6, 8): 75,
-                            range(9, 10): 75,
+                            range(2, 5): 75,
+                            range(5, 8): 75,
+                            range(8, 10): 75,
              },
              "4": {
                         0: {
                             range(0, 5): 200,
-                            range(6, 11): 100,
-                            range(12, 16): 100,
-                            range(17, 25): 100,
+                            range(5, 11): 100,
+                            range(11, 16): 100,
+                            range(16, 25): 100,
                             range(25, 30): 100,
-                            range(31, 36): 100,
-                            range(37, 44): 100,
-                            range(45, 50): 100,
-                            range(51, 60): 100,
+                            range(30, 36): 100,
+                            range(36, 44): 100,
+                            range(44, 50): 100,
+                            range(50, 60): 100,
                         },
                         1: {
                             range(0, 5): 100,
-                            range(6, 11): 75,
-                            range(12, 16): 75,
-                            range(17, 25): 75,
+                            range(5, 11): 75,
+                            range(11, 16): 75,
+                            range(16, 25): 75,
                             range(25, 30): 75,
-                            range(31, 36): 75,
-                            range(37, 44): 75,
-                            range(45, 50): 75,
-                            range(51, 60): 75
+                            range(30, 36): 75,
+                            range(36, 44): 75,
+                            range(44, 50): 75,
+                            range(50, 60): 75
                         },
                         2: {
                             range(0, 5): 50,
-                            range(6, 11): 25,
-                            range(12, 16): 25,
-                            range(17, 25): 25,
+                            range(5, 11): 25,
+                            range(11, 16): 25,
+                            range(16, 25): 25,
                             range(25, 30): 25,
-                            range(31, 36): 25,
-                            range(37, 44): 25,
-                            range(45, 50): 25,
-                            range(51, 60): 25
+                            range(30, 36): 25,
+                            range(36, 44): 25,
+                            range(44, 50): 25,
+                            range(50, 60): 25
                         }
              },
     }
@@ -216,9 +212,8 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
                     write_csv("intento_Ok", const, "Ok", tupla[2])
                     fin += 1
                     found_list.append(list_touchs[0][2])
-                    player.attempt_ok += 1
                     update_score_by_game(player, sec_cont, min_cont)
-                    window["-POINTS-"].update(f"PUNTOS {str(player.puntaje)}")
+                    window["-POINTS-"].update(f"✩ {str(player.puntaje)}", text_color="green")
                     list_touchs[0] = None
                     list_touchs[1] = None
                     list_touchs[2] = None
@@ -227,7 +222,6 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
                     write_csv("intento_Error", const, "Error", tupla[2])
                     time.sleep(1)
                     sec -= 1
-                    player.attempt_error += 1
                     # window[first_touch].update(image_filename= 'question.png')
                     # window[second_touch].update(image_filename= 'question.png')
                     window[list_touchs[0]].update('?')

@@ -70,12 +70,12 @@ def verify(val):
         Verifica que la configuracion que haya elegido el jugador cumpla con los valores establecidos para el nivel 4
     """
     ok = False
-    
+
     list_themes = ['Black', 'TealMono', 'Topanga', 'DarkGreen1']
     if val['-TEMA-'] in list_themes:
-        if 4 <= int(val['-DIM1-']) <= 5:
-            if 4 <=int(val['-DIM2-'])<= 6:
-                if 2 <= int(val['-COINCID-']) <= 3:
+        if int(val['-DIM1-']) in range(4, 6):
+            if int(val['-DIM2-']) in range(4, 7):
+                if int(val['-COINCID-']) in range(2, 4):
                     if val['-COINCID-'] == 3:
                         if (val['-DIM1-'] * val['-DIM2-']) % 3 == 0:
                             ok = val

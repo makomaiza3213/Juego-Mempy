@@ -24,5 +24,6 @@ def login():
                      [sg.Button(" SALIR ", font=("Fixedsys", 12), border_width=5, button_color=('black', 'red'))]
                     ]
 
-    window = sg.Window("Welcome!", layout_column, element_justification='center', margins=(200, 150))
+    window = sg.Window("Welcome!", layout_column, element_justification='center', margins=(200, 150)).Finalize()
+    # window.Maximize()
     return window

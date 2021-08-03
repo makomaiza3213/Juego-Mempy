@@ -4,3 +4,4 @@ pygame~=2.0.1
 pandas~=1.2.4
 matplotlip~=0.2
 matplotlib~=3.4.2
+keyboard~=0.13.5
