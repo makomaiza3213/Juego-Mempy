@@ -130,7 +130,7 @@ def update_score_by_game(player, sec, min):
                             range(8, 10): 75,
              },
              "4": {
-                        0: {
+                        "0": {
                             range(0, 5): 200,
                             range(5, 11): 100,
                             range(11, 16): 100,
@@ -141,7 +141,7 @@ def update_score_by_game(player, sec, min):
                             range(44, 50): 100,
                             range(50, 60): 100,
                         },
-                        1: {
+                        "1": {
                             range(0, 5): 100,
                             range(5, 11): 75,
                             range(11, 16): 75,
@@ -152,7 +152,7 @@ def update_score_by_game(player, sec, min):
                             range(44, 50): 75,
                             range(50, 60): 75
                         },
-                        2: {
+                        "2": {
                             range(0, 5): 50,
                             range(5, 11): 25,
                             range(11, 16): 25,
@@ -166,13 +166,20 @@ def update_score_by_game(player, sec, min):
              },
     }
 
-    if player.nivel_actual == 4:
-        list_points = points[player.nivel_actual][min]
+    if player.nivel_actual == "4":
+        valores = points[player.nivel_actual][str(min)]
+        valores = valores.items()
+        list_points = list(valores)
+        for x in list_points:
+            if sec in x[0]:
+                player.puntaje = x[1]
     else:
         list_points = points[player.nivel_actual]
-    for rango, pts in list_points.items():
-        if sec in rango:
-            player.puntaje = pts
+        for rango, pts in list_points.items():
+            if sec in rango:
+                player.puntaje = pts
+
+
 
 
 def board_elements(player, lista):
