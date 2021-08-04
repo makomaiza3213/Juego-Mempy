@@ -10,12 +10,13 @@ def login():
     sg.theme('DarkAmber')
     logo = open_image("mempy image logo 2.0.png")
     layout_column = [
+                     #  key='-USERNAME-'
                      # [sg.Text("", font=("Fixedsys", 50))],
                      # [sg.Image("C:/Users/makom/Desktop/Facu 2021/PYTHON/Juego Mempy/Trabajo/src/images/mempy image logo 2.0.png")],
                      [sg.Image(logo)],
                      [sg.Text("INGRESAR", size=(8, 1), font=("Fixedsys", 20))],
                      [sg.Text('USUARIO', font=("Fixedsys", 15))],
-                     [sg.InputText(size=(15, 1), font=("Fixedsys", 12), key='-USERNAME-')],
+                     [sg.InputText(size=(15, 1), font=("Fixedsys", 12), key='-IN-'), sg.Button('OK', bind_return_key=True, visible=False)],
                      [sg.Button('ENTRAR', size=(10, 1), font=("Fixedsys", 12), border_width=5)],
                      [sg.Text("", size=(0, 1))],
                      [sg.Text('¿ERES NUEVO?', font=("Fixedsys", 20))],

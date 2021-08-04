@@ -30,7 +30,7 @@ def functionalities_enter(window, values):
     window.close()
     sounds.play_sound('click.wav')
     if os.path.exists("usuarios.json"):
-        usuario = buscar(values['-USERNAME-'])
+        usuario = buscar(values['-IN-'])
         if usuario:
             player = class_player.Player(usuario)
             lista = sl.values_hour_day()
