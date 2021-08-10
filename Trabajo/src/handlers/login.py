@@ -9,7 +9,7 @@ from src.handlers import sounds
 
 def buscar(nom):
     """
-        lee y busca en el archivo el nombre que recibe por parametro y retorna dicho usuario si lo encontro , sino retorna False
+        Lee y busca en el archivo el nombre que recibe por parámetro y retorna dicho usuario si lo encontró , sino retorna False
     """
     existe = False
     with open("usuarios.json") as file:
@@ -22,10 +22,10 @@ def buscar(nom):
 
 def functionalities_enter(window, values):
     """
-        Verificacion de la existencia del archivo json de usuarios,
+        Verificación de la existencia del archivo json de usuarios,
         busqueda del usuario
-        instanciacion del objeto player
-        creacion del archivo  json de puntuaciones
+        instanciación del objeto player
+        creación del archivo  json de puntuaciones
     """
     window.close()
     sounds.play_sound('click.wav')

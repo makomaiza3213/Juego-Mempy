@@ -4,8 +4,14 @@ from src.handlers import images
 
 def seleccion(dia, turno):
     """
-        definicion de los criterios segun el dia y el rango horario, invoca la funcion correspondiente ,
-        valga la redundancia, y retorna una lista con las palabras a usar en el tablero
+    Definición de los criterios según el día y el rango horario, invoca la función correspondiente
+
+    Args:
+        dia: Int, número entre 0 y 6
+        turno: String, que representa el rango horario, mañana y tarde
+
+    Returns:
+        lista: List, palabras a usar en el tablero
     """
     criterios_data = {
         0: {"mañana": {"criterios": "los 10 peces más pescados ", "funcion": fishes.calcula_max, "parametros": ()},

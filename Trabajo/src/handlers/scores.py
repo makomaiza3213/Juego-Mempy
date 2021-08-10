@@ -3,6 +3,16 @@ import json
 
 
 def no_encontre(nom):
+    """
+    Verifica si no se tiene registro de puntuaciones del jugador
+
+    Args:
+        nom: String, nombre del jugador
+
+    Returns:
+        True, si no se tiene registro de sus puntuaciones
+        False, si se tiene un registro de sus puntuaciones
+    """
     with open("scores.json") as file:
         data = json.load(file)
     i = 0
@@ -16,6 +26,11 @@ def no_encontre(nom):
 
 
 def file_scores(player):
+    """
+    Si existe o no el archivo scores.json, se creará o agregará un nuevo registro de puntuaciones según corresponda
+    Args:
+        player: objeto jugador
+    """
     if not path.exists("scores.json"):
         player_score = [[player.nick, 0, 0, 0, 0]]
         with open("scores.json", "w") as file:

@@ -10,8 +10,8 @@ from src.handlers import sounds
 
 def loop():
     """
-        Loop de la ventana de menú que capta los eventos y valores de entrada para su procesamiento ,
-        verificación de la existencia del archivo de registro de jugadores y la correcta escritura en dicho archivo
+        Loop de la ventana de registro que capta los eventos y valores de entrada,
+        verifica la existencia del archivo usuarios.json y guarda según corresponda
     """
     window = layout.open_sign_up()
 

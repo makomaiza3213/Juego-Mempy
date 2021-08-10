@@ -11,7 +11,13 @@ def write_json(data, filename):
 
 def add_user(values):
     """
-        Agrega al archivo de usuarios un nuevo usuario con los datos recibidos del registro y la configuracion por defecto
+    Agrega al archivo un nuevo usuario con los datos recibidos del registro y la configuración por defecto
+
+    Args:
+        values: Dict, valores de entrada ingresados
+
+    Returns:
+        Dict, los datos del jugador
     """
     with open("default_configuration.json") as json_file:
         config = json.load(json_file)
@@ -27,9 +33,15 @@ def add_user(values):
 
 def create_file_users(values):
     """
-        Crea el archivo de usuarios en caso de que no exista,
-        agrega un usuario con los datos recibidos del registro y la configuracion por defecto,
-        y actualiza el archivo
+    Crea el archivo de usuarios,
+    agrega un usuario con los datos recibidos del registro y la configuración por defecto,
+    y actualiza el archivo
+
+    Args:
+        values: Dict, valores de entrada ingresados
+
+    Returns:
+        Dict, los datos del jugador
     """
     with open("default_configuration.json") as json_file:
         config = json.load(json_file)
@@ -44,6 +56,16 @@ def create_file_users(values):
 
 
 def ok(values):
+    """
+    Se verifica que no hayan campos vacios o datos que no correspondan
+
+    Args:
+        values: Dict, valores de entrada ingresados
+
+    Returns:
+        True, si los datos son válidos
+        False, si son inválidos
+    """
     usuario = False
     gens = ["masculino", "femenino", "otros"]
     if values['-USERN-'] != "" or values['-AGE-'] != "":

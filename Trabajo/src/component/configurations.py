@@ -6,8 +6,15 @@ from src.handlers import sounds
 
 def loop(player, lista):
     """
-        loop para la ventana de configuraciones que se encarga de captar eventos y tomar los valores de entrada
-        para la correcta creación y ejecución de la ventana de juego
+    Loop para la ventana de configuraciones que se encarga de captar eventos y
+    tomar los valores de entrada y ejecución de la ventana de juego
+
+    Args:
+        player: object, datos del jugador
+        lista: list, listado de palabras para el juego
+
+    Returns:
+        window: object
     """
     window = layout.menu_configurations(player)
     #list_key = ['-DIM1-', '-DIM2-', '-COINCID-', '-TIME-']

@@ -1,6 +1,11 @@
 class Player:
 
     def __init__(self, usuario):
+        """
+            Inicialización de las variables de instancia
+        Args:
+            usuario: Dict, información del jugador
+        """
         self._nick = usuario["nombre"]
         self._edad = usuario["edad"]
         self._genero = usuario["genero"]

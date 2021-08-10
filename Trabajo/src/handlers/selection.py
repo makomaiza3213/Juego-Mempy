@@ -4,7 +4,11 @@ from src.handlers import criteria
 
 def values_hour_day():
     """
-        tomando dia y hora actuales invoca a una funcion correspondiente a dichos valores y retorna los valores de dicho criterio
+        Tomando el día y la hora actuales, invoca a la función correspondiente a dichos valores
+        y retorna los valores correspondientes
+
+    Returns
+            lista con las palabras correspondientes al dia y la hora
     """
     nro_dia = datetime.datetime.today().weekday()
     tiempo = datetime.datetime.now()

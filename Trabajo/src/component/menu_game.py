@@ -7,7 +7,15 @@ from src.handlers import sounds
 
 def loop(player, lista):
     """
-        Loop de la ventana del menú del juego que capta los eventos para su redirigido de ventana correcto
+    Loop de la ventana del menú del juego que capta
+    los eventos para el redireccionamiento a la ventana correspondiente
+
+    Args:
+        player: object, datos del jugador
+        lista: list, listado de palabras para el juego
+
+    Returns:
+        window: object
     """
     window = layout.menu_game()
 
@@ -48,7 +56,11 @@ def loop(player, lista):
 
 def start(player, lista):
     """
-        Ejecucion de la ventana del menú del juego y su posterior cierre de ejecución
-    """ 
+    Ejecucion de la ventana del menú del juego y su posterior cierre de ejecución
+
+    Args:
+        player: object, datos del jugador
+        lista: list, listado de palabras para el juego
+    """
     window_game_menu = loop(player, lista)
     window_game_menu.close()
