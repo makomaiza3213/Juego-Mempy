@@ -42,10 +42,10 @@ def previous_functionalities_starting_a_game(player, matriz, window, play_data, 
     window.FindElement("INICIAR").Update(disabled=True)
     show_words(player, matriz, window)
     timer_running = True
-    create_csv(play_data)
-    write_csv("inicio_partida", play_data)
+    file_plays = create_csv(play_data)
+    file_plays = write_csv("inicio_partida", play_data, file_plays)
     player.puntaje_0 = 0
-    return play_data, timer_running
+    return play_data, timer_running, file_plays
 
 
 def show_words(player, matriz, window):
@@ -63,7 +63,7 @@ def show_words(player, matriz, window):
     window.refresh()
 
 
-def playtime_features(timer_running, window, min, sec, sec_cont, min_cont, play_data, player):
+def playtime_features(timer_running, window, min, sec, sec_cont, min_cont, play_data, player, file_plays):
     if timer_running:
         window['-TIMER1-'].update('{:02d}:{:02d}'.format(min, sec))
         sec -= 1
@@ -71,7 +71,8 @@ def playtime_features(timer_running, window, min, sec, sec_cont, min_cont, play_
 
     if (sec == 0) and (min == 0):
         timer_running = False
-        write_csv("fin", play_data, "timeout")
+        file_plays = write_csv("fin", play_data, file_plays, "timeout")
+        file_plays.close()
         sg.Popup(player.msj_derrota)
 
     if sec == 0:
@@ -95,12 +96,13 @@ def alert_time(player, window, min, sec):
             window["-ALERTIME-"].update("")
 
 
-def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_cont, timer_running, play_data):
+def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_cont, timer_running, play_data, file_plays):
     if list_elems_touch is not None:
         if fin == list_elements[4]:  # comprobar si ganaste
             timer_running = False
             sounds.play_sound('victory.wav')
-            write_csv("fin", play_data, "finalizada", "", player.puntaje)
+            file_plays = write_csv("fin", play_data, file_plays, "finalizada", "", player.puntaje)
+            file_plays.close()
             update_scores(player)
             player.puntaje_0 = 0
             sg.popup(player.msj_victoria, font=('Fixedsys', 15))
@@ -201,10 +203,10 @@ def board_elements(player, lista):
     return [filas, columnas, nivel, lista, num]
 
 
-def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_list, player, sec_cont, min_cont):
+def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_list, player, sec_cont, min_cont, file_plays):
     if list_touchs[0] is None:
         list_touchs[0] = (tupla[0], tupla[1], tupla[2])
-        write_csv("intento_Error", const, "Error", tupla[2])
+        write_csv("intento_Error", const, file_plays, "Error", tupla[2])
     elif list_touchs[1] is None:
         list_touchs[1] = (tupla[0], tupla[1], tupla[2])
     elif player.nivel['coincidencias'] == 3:
@@ -216,7 +218,7 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
             if (list_touchs[0] != list_touchs[1]) and (list_touchs[1] != list_touchs[2] and list_touchs[0] != list_touchs[2]) or (list_touchs[0] != list_touchs[1]) and (list_touchs[1] != list_touchs[2]):
                 if (list_touchs[0][2] == list_touchs[1][2] and player.nivel["coincidencias"] == 2) or (list_touchs[0][2] == list_touchs[1][2] == list_touchs[2][2] and player.nivel["coincidencias"] == 3):
                     sounds.play_sound("pickup.wav")
-                    write_csv("intento_Ok", const, "Ok", tupla[2])
+                    file_plays = write_csv("intento_Ok", const, file_plays, "Ok", tupla[2])
                     fin += 1
                     found_list.append(list_touchs[0][2])
                     update_score_by_game(player, sec_cont, min_cont)
@@ -226,7 +228,7 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
                     list_touchs[2] = None
                 else:
                     sounds.play_sound("broken.wav")
-                    write_csv("intento_Error", const, "Error", tupla[2])
+                    file_plays = write_csv("intento_Error", const, file_plays, "Error", tupla[2])
                     time.sleep(1)
                     sec -= 1
                     # window[first_touch].update(image_filename= 'question.png')

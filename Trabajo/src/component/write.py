@@ -13,6 +13,8 @@ def increase_number_game(filename, play_data):
         datos = csv.reader(file)
         list_datos = list(datos)
         play_data[0] = int(list_datos[len(list_datos) - 1][1]) + play_data[0]
+        file_plays = file
+    return file_plays
 
 
 def create_csv(play_data):
@@ -22,7 +24,7 @@ def create_csv(play_data):
         en caso contrario :     crea el encabezado y el archivo csv para su posterior escritura
     """
     if os.path.exists("jugadas.csv"):
-        increase_number_game("jugadas.csv", play_data)
+        file_plays = increase_number_game("jugadas.csv", play_data)
     else:
         fields = ["Tiempo jugada", "Partida", "Cantidad total de palabras a adivinar", "Nombre de evento",
                   "Usuario-nick",
@@ -32,9 +34,10 @@ def create_csv(play_data):
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow(fields)
             csvfile.close()
+    return file_plays
 
 
-def write_csv(evento, play_data, estado="", palabra="", puntaje=""):
+def write_csv(evento, play_data, file_plays, estado="", palabra="", puntaje=""):
     """
         por medio de consultas de tiempo y valores recibidos por parametros actualiza los datos de
         la lista que corresponde a una fila del archivo csv, abre el archivo y escribe los datos
@@ -58,7 +61,17 @@ def write_csv(evento, play_data, estado="", palabra="", puntaje=""):
                         estado, palabra,
                         play_data[5], puntaje]
 
-    with open("jugadas.csv", "a", newline='') as csvfile:
+    if file_plays.closed:
+        file_plays = open("jugadas.csv", "a", newline='')
+        csvwriter = csv.writer(file_plays)
+        csvwriter.writerow(rows)
+    else:
+        csvwriter = csv.writer(file_plays)
+        csvwriter.writerow(rows)
+
+    """with open("jugadas.csv", "a", newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(rows)
         csvfile.close()
+    """
+    return file_plays

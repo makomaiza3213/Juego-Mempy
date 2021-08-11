@@ -16,8 +16,8 @@ def loop():
     # keyboard.on_press_key("Intro", functionalities_enter(window, values))
     while True:
         if event in (sg.WIN_CLOSED, ' SALIR '):
-                sounds.play_sound("click.wav")
-                break
+            sounds.play_sound("click.wav")
+            break
         if event == "ENTRAR" or event == "OK":
             functionalities_enter(window, values)
             break
@@ -25,8 +25,10 @@ def loop():
             sounds.play_sound('click.wav')
             window.close()
             new_user.start()
+            break
 
     return window
+
 
 def start():
     """

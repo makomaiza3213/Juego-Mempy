@@ -21,7 +21,7 @@ def loop(player, lista):
         try:
             if event in 'INICIAR':
                 sounds.play_sound("click.wav")
-                play_data, timer_running = previous_functionalities_starting_a_game(player, matriz, window, play_data, timer_running)
+                play_data, timer_running, file_plays = previous_functionalities_starting_a_game(player, matriz, window, play_data, timer_running)
                 break
         except TypeError:
             print("Presione INICIAR para jugar")
@@ -40,7 +40,7 @@ def loop(player, lista):
                 window_warning = layout_play_game.warning()
                 event, values = window_warning.read()
                 if event == "SI":
-                    write_csv("fin", play_data, "abandonada")
+                    write_csv("fin", play_data, file_plays, "abandonada")
                     window_warning.close()
                     window.close()
                     break
@@ -55,19 +55,19 @@ def loop(player, lista):
                 # window[(fila, colum, data)].update(image_filename=os.path.join(fileDir, "src", "images", data))
 
                 window.refresh()
-                list_elems_touch = touch_controller((fila, colum, data), window, fin, min, sec, list_touchs, play_data, found_list, player, sec_cont, min_cont)
+                list_elems_touch = touch_controller((fila, colum, data), window, fin, min, sec, list_touchs, play_data, found_list, player, sec_cont, min_cont, file_plays)
                 list_touchs[0] = list_elems_touch[3][0]
                 list_touchs[1] = list_elems_touch[3][1]
                 list_touchs[2] = list_elems_touch[3][2]
                 fin = list_elems_touch[0]
 
-            timer_running, min, sec, sec_cont, min_cont, play_data = playtime_features(timer_running, window, min, sec, sec_cont, min_cont, play_data, player)
+            timer_running, min, sec, sec_cont, min_cont, play_data = playtime_features(timer_running, window, min, sec, sec_cont, min_cont, play_data, player, file_plays)
             if not timer_running:
                 break
 
             window["-HITS-"].update(str(fin) + "/" + str(list_elements[4]))
 
-            list_elems_touch, fin, list_elements, timer_running = verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_cont, timer_running, play_data)
+            list_elems_touch, fin, list_elements, timer_running = verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_cont, timer_running, play_data, file_plays)
             if not timer_running:
                 break
 
