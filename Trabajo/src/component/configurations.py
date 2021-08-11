@@ -17,19 +17,12 @@ def loop(player, lista):
         window: object
     """
     window = layout.menu_configurations(player)
-    #list_key = ['-DIM1-', '-DIM2-', '-COINCID-', '-TIME-']
-    # for key in list_key:
-    #    window.FindElement(key).Update(disabled=True)
+
     while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED:
             break
-        # if values['-LV4-']:
-        #    for key in list_key:
-        #        window.FindElement(key).Update(disabled=False)
-        # if not values['-LV4-']:
-        #    for key in list_key:
-        #        window.FindElement(key).Update(disabled=True)
+
         if event == '-GUARDAR-':
             sounds.play_sound("click.wav")
             if values['-LV4-']:
@@ -50,6 +43,7 @@ def loop(player, lista):
         if event == '-VOLVER-':
             sounds.play_sound("click.wav")
             break
+
     return window
 
 
