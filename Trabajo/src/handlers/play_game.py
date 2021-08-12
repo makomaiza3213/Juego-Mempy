@@ -1,4 +1,4 @@
-from src.component.write import write_csv, create_csv
+from src.handlers.write import write_csv, create_csv
 from src.handlers import sounds
 import random
 import time
@@ -180,8 +180,6 @@ def update_score_by_game(player, sec, min):
         for rango, pts in list_points.items():
             if sec in rango:
                 player.puntaje = pts
-
-
 
 
 def board_elements(player, lista):

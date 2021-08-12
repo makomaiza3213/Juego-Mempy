@@ -44,10 +44,6 @@ def save_config(player, values):
                 player.msj_tiempo = values['-MSJRES-']
                 player.tema = values['-TEMA-']
 
-
-                # data['usuarios'][i]['configuracion'][level]['dimensiones']['x'] = player.nivel['dimensiones']['x']
-                # data['usuarios'][i]['configuracion'][level]['dimensiones']['y'] = player.nivel['dimensiones']['y']
-
                 data['usuarios'][i]['configuracion'][level]['dimensiones']['x'] = player.nivel['dimensiones']['x']
                 data['usuarios'][i]['configuracion'][level]['dimensiones']['y'] = player.nivel['dimensiones']['y']
                 data['usuarios'][i]['configuracion'][level]['coincidencias'] = player.nivel['coincidencias']

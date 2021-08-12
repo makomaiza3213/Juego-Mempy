@@ -28,7 +28,6 @@ def loop(player, lista):
             if values['-LV4-']:
                 if cfg.verify(values):
                     sg.Popup("Guardado")
-                    window.Refresh()
                     cfg.save_config(player, values)
                 else:
                     sg.popup("Elija valores permitidos")
@@ -36,7 +35,6 @@ def loop(player, lista):
                 if cfg.verify_123(values):
                     cfg.save_config(player, values)
                     sg.Popup("Guardado")
-                    window.Refresh()
                 else:
                     sg.popup("Elija valores permitidos")
 

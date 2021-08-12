@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from src.component.write import write_csv
+from src.handlers.write import write_csv
 from src.handlers.play_game import \
     previous_functionalities_starting_a_game, pre_initializations_for_the_component, playtime_features, verify_winner, \
     touch_controller
