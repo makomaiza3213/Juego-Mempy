@@ -1,3 +1,7 @@
+import datetime
+import os
+
+from src.handlers.images import open_image
 from src.handlers.write import write_csv, create_csv
 from src.handlers import sounds
 import random
@@ -54,12 +58,19 @@ def show_words(player, matriz, window):
     """
     for i in range(player.nivel["dimensiones"]["x"]):
         for j in range(player.nivel["dimensiones"]["y"]):
-            window[(j, i, matriz[i][j])].update(matriz[i][j])
+            if datetime.datetime.today().weekday() != 2:
+                window[(j, i, matriz[i][j])].update(matriz[i][j])
+            else:
+                window[(j, i, matriz[i][j])].update(image_filename=open_image(matriz[i][j]), image_size=(75, 75))
     window.refresh()
     time.sleep(5)
     for i in range(player.nivel["dimensiones"]["x"]):
         for j in range(player.nivel["dimensiones"]["y"]):
-            window[(j, i, matriz[i][j])].update("?")
+            if datetime.datetime.today().weekday() != 2:
+                window[(j, i, matriz[i][j])].update("?")
+            else:
+                window[(j, i, matriz[i][j])].update(image_filename=open_image("question.png"), image_size=(75, 75))
+
     window.refresh()
 
 
@@ -96,7 +107,8 @@ def alert_time(player, window, min, sec):
             window["-ALERTIME-"].update("")
 
 
-def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_cont, timer_running, play_data, file_plays):
+def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_cont, timer_running, play_data,
+                  file_plays):
     if list_elems_touch is not None:
         if fin == list_elements[4]:  # comprobar si ganaste
             timer_running = False
@@ -110,62 +122,61 @@ def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_co
 
 
 def update_score_by_game(player, sec, min):
-
     points = {"1": {
-                            range(0, 3): 50,
-                            range(3, 6): 50,
-                            range(6, 10): 40,
-                            range(10, 14): 30,
-                            range(14, 18): 20,
-                            range(18, 20): 10
-                        },
-             "2":{
-                            range(0, 3): 70,
-                            range(3, 6): 70,
-                            range(6, 10): 60,
-                            range(10, 15): 50,
-             },
-             "3":{
-                            range(0, 2): 75,
-                            range(2, 5): 75,
-                            range(5, 8): 75,
-                            range(8, 10): 75,
-             },
-             "4": {
-                        "0": {
-                            range(0, 5): 200,
-                            range(5, 11): 100,
-                            range(11, 16): 100,
-                            range(16, 25): 100,
-                            range(25, 30): 100,
-                            range(30, 36): 100,
-                            range(36, 44): 100,
-                            range(44, 50): 100,
-                            range(50, 60): 100,
-                        },
-                        "1": {
-                            range(0, 5): 100,
-                            range(5, 11): 75,
-                            range(11, 16): 75,
-                            range(16, 25): 75,
-                            range(25, 30): 75,
-                            range(30, 36): 75,
-                            range(36, 44): 75,
-                            range(44, 50): 75,
-                            range(50, 60): 75
-                        },
-                        "2": {
-                            range(0, 5): 50,
-                            range(5, 11): 25,
-                            range(11, 16): 25,
-                            range(16, 25): 25,
-                            range(25, 30): 25,
-                            range(30, 36): 25,
-                            range(36, 44): 25,
-                            range(44, 50): 25,
-                            range(50, 60): 25
-                        }
-             },
+        range(0, 3): 50,
+        range(3, 6): 50,
+        range(6, 10): 40,
+        range(10, 14): 30,
+        range(14, 18): 20,
+        range(18, 20): 10
+    },
+        "2": {
+            range(0, 3): 70,
+            range(3, 6): 70,
+            range(6, 10): 60,
+            range(10, 15): 50,
+        },
+        "3": {
+            range(0, 2): 75,
+            range(2, 5): 75,
+            range(5, 8): 75,
+            range(8, 10): 75,
+        },
+        "4": {
+            "0": {
+                range(0, 5): 200,
+                range(5, 11): 100,
+                range(11, 16): 100,
+                range(16, 25): 100,
+                range(25, 30): 100,
+                range(30, 36): 100,
+                range(36, 44): 100,
+                range(44, 50): 100,
+                range(50, 60): 100,
+            },
+            "1": {
+                range(0, 5): 100,
+                range(5, 11): 75,
+                range(11, 16): 75,
+                range(16, 25): 75,
+                range(25, 30): 75,
+                range(30, 36): 75,
+                range(36, 44): 75,
+                range(44, 50): 75,
+                range(50, 60): 75
+            },
+            "2": {
+                range(0, 5): 50,
+                range(5, 11): 25,
+                range(11, 16): 25,
+                range(16, 25): 25,
+                range(25, 30): 25,
+                range(30, 36): 25,
+                range(36, 44): 25,
+                range(44, 50): 25,
+                range(50, 60): 25
+            }
+        },
     }
 
     if player.nivel_actual == "4":
@@ -201,7 +212,8 @@ def board_elements(player, lista):
     return [filas, columnas, nivel, lista, num]
 
 
-def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_list, player, sec_cont, min_cont, file_plays):
+def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_list, player, sec_cont, min_cont,
+                     file_plays):
     if list_touchs[0] is None:
         list_touchs[0] = (tupla[0], tupla[1], tupla[2])
         write_csv("intento_Error", const, file_plays, "Error", tupla[2])
@@ -211,10 +223,17 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
         if list_touchs[2] is None:
             list_touchs[2] = (tupla[0], tupla[1], tupla[2])
 
-    if (list_touchs[0] is not None and list_touchs[1] is not None and list_touchs[2] is not None) or (list_touchs[0] is not None and list_touchs[1] is not None and player.nivel["coincidencias"] == 2):
-        if (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list) or (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list and list_touchs[2][2] not in found_list):
-            if (list_touchs[0] != list_touchs[1]) and (list_touchs[1] != list_touchs[2] and list_touchs[0] != list_touchs[2]) or (list_touchs[0] != list_touchs[1]) and (list_touchs[1] != list_touchs[2]):
-                if (list_touchs[0][2] == list_touchs[1][2] and player.nivel["coincidencias"] == 2) or (list_touchs[0][2] == list_touchs[1][2] == list_touchs[2][2] and player.nivel["coincidencias"] == 3):
+    if (list_touchs[0] is not None and list_touchs[1] is not None and list_touchs[2] is not None) or (
+            list_touchs[0] is not None and list_touchs[1] is not None and player.nivel["coincidencias"] == 2):
+        if (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list) or (
+                list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list and list_touchs[2][
+            2] not in found_list):
+            if (list_touchs[0] != list_touchs[1]) and (
+                    list_touchs[1] != list_touchs[2] and list_touchs[0] != list_touchs[2]) or (
+                    list_touchs[0] != list_touchs[1]) and (list_touchs[1] != list_touchs[2]):
+                if (list_touchs[0][2] == list_touchs[1][2] and player.nivel["coincidencias"] == 2) or (
+                        list_touchs[0][2] == list_touchs[1][2] == list_touchs[2][2] and player.nivel[
+                    "coincidencias"] == 3):
                     sounds.play_sound("pickup.wav")
                     file_plays = write_csv("intento_Ok", const, file_plays, "Ok", tupla[2])
                     fin += 1
@@ -229,12 +248,20 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
                     file_plays = write_csv("intento_Error", const, file_plays, "Error", tupla[2])
                     time.sleep(1)
                     sec -= 1
-                    # window[first_touch].update(image_filename= 'question.png')
-                    # window[second_touch].update(image_filename= 'question.png')
-                    window[list_touchs[0]].update('?')
-                    window[list_touchs[1]].update('?')
-                    if player.nivel["coincidencias"] == 3:
-                        window[list_touchs[2]].update('?')
+                    if datetime.datetime.today().weekday() == 2:
+                        fileDir = os.path.dirname(os.path.realpath('__file__'))
+                        window[list_touchs[0]].update(
+                            image_filename=os.path.join(fileDir, "src", "images", 'question.png'), image_size=(75, 75))
+                        window[list_touchs[1]].update(
+                            image_filename=os.path.join(fileDir, "src", "images", 'question.png'), image_size=(75, 75))
+                        if player.nivel["coincidencias"] == 3:
+                            window[list_touchs[2]].update(
+                                image_filename=os.path.join(fileDir, "src", "images", 'question.png'), image_size=(75, 75))
+                    else:
+                        window[list_touchs[0]].update('?')
+                        window[list_touchs[1]].update('?')
+                        if player.nivel["coincidencias"] == 3:
+                            window[list_touchs[2]].update('?')
                     list_touchs[0] = None
                     list_touchs[1] = None
                     list_touchs[2] = None

@@ -8,7 +8,7 @@ def login():
         diseño de la ventana de inicio de la aplicacion ,para inicio de Sesion y registro
     """
     sg.theme('DarkAmber')
-    logo = open_image("mempy image logo 2.0.png")
+    logo = open_image("logo.png")
     layout_column = [
                      #  key='-USERNAME-'
                      # [sg.Text("", font=("Fixedsys", 50))],
@@ -25,6 +25,6 @@ def login():
                      [sg.Button(" SALIR ", font=("Fixedsys", 12), border_width=5, button_color=('black', 'red'))]
                     ]
 
-    window = sg.Window("Welcome!", layout_column, element_justification='center', margins=(200, 150)).Finalize()
+    window = sg.Window("Welcome!", layout_column, element_justification='center', margins=(200, 150))
     # window.Maximize()
     return window

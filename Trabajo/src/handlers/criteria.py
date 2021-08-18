@@ -1,5 +1,5 @@
 from src.handlers.handlers_csv import drugstores, clubs, fishes, cards, churches, products, district
-from src.handlers import images
+from src.handlers.images import list_images
 
 
 def seleccion(dia, turno):
@@ -26,7 +26,8 @@ def seleccion(dia, turno):
         2: {"mañana": {"criterios": "Las 15 marca que tienen mas productos libres de gluten",
                        "funcion": products.product_brand_filter, "parametros": ()},
             "tarde": {"criterios": "Las 15 marcas de autos de Europe , USA, con precio por debajo de el promedio",
-                      "funcion": cards.car_filter_by_price, "parametros": ()}
+                      # "funcion": cards.car_filter_by_price, "parametros": ()}
+                      "funcion": list_images, "parametros": ()},
             },
         3: {"mañana": {"criterios": 'Peces pescados en el Puerto Rawson en la provincia de Chubut',
                        "funcion": fishes.peces_Rawson_Chubut, "parametros": ("Rawson", "Chubut")},
