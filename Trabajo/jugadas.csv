@@ -1,0 +1,25 @@
+Tiempo jugada,Partida,Cantidad total de palabras a adivinar,Nombre de evento,Usuario-nick,usuario-genero,usuario-edad,Estado,Palabra,nivel,puntaje
+1629398815.7991307,1,2,inicio_partida,MARCOS,masculino,20,,,1,
+1629398816.316469,1,2,intento,MARCOS,masculino,20,Error,Corvina negra,1,
+1629398816.6170857,1,2,intento,MARCOS,masculino,20,Ok,Corvina negra,1,
+1629398816.900337,1,2,intento,MARCOS,masculino,20,Error,Cazón,1,
+1629398817.1083362,1,2,intento,MARCOS,masculino,20,Ok,Cazón,1,
+1629398817.134337,1,2,fin,MARCOS,masculino,20,finalizada,,1,100
+1629398830.482743,2,3,inicio_partida,MARCOS,masculino,20,,,2,
+1629398830.8726208,2,3,intento,MARCOS,masculino,20,Error,Bagre,2,
+1629398831.1825323,2,3,intento,MARCOS,masculino,20,Ok,Bagre,2,
+1629398831.4425738,2,3,intento,MARCOS,masculino,20,Error,Brótola,2,
+1629398831.846624,2,3,intento,MARCOS,masculino,20,Ok,Brótola,2,
+1629398832.15438,2,3,intento,MARCOS,masculino,20,Error,Rayas nep,2,
+1629398832.404495,2,3,intento,MARCOS,masculino,20,Ok,Rayas nep,2,
+1629398832.4284961,2,3,fin,MARCOS,masculino,20,finalizada,,2,210
+1629398846.2511656,3,4,inicio_partida,MARCOS,masculino,20,,,3,
+1629398846.6986537,3,4,intento,MARCOS,masculino,20,Error,Otras especies de peces,3,
+1629398846.988959,3,4,intento,MARCOS,masculino,20,Ok,Otras especies de peces,3,
+1629398847.290958,3,4,intento,MARCOS,masculino,20,Error,Pescadilla real,3,
+1629398847.6999588,3,4,intento,MARCOS,masculino,20,Ok,Pescadilla real,3,
+1629398848.0974793,3,4,intento,MARCOS,masculino,20,Error,Cazón,3,
+1629398848.324483,3,4,intento,MARCOS,masculino,20,Ok,Cazón,3,
+1629398848.5300043,3,4,intento,MARCOS,masculino,20,Error,Brótola,3,
+1629398848.795488,3,4,intento,MARCOS,masculino,20,Ok,Brótola,3,
+1629398848.8160076,3,4,fin,MARCOS,masculino,20,finalizada,,3,300
