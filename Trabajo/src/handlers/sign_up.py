@@ -1,4 +1,5 @@
 import json
+import PySimpleGUI as sg
 
 
 def write_json(data, filename):
@@ -66,9 +67,45 @@ def ok(values):
         True, si los datos son válidos
         False, si son inválidos
     """
+
     usuario = False
     gens = ["masculino", "femenino", "otros"]
-    if values['-USERN-'] != "" or values['-AGE-'] != "":
+    if values['-USERN-'] != "" and (values['-AGE-'] != "" and values['-AGE-'] in range(2, 101)):
         if values["-GENDER-"] in gens:
             usuario = True
+    else:
+        if values["-GENDER-"] not in gens and values['-USERN-'] == "" and values['-AGE-'] == "":
+            usuario = 1
+        elif values['-USERN-'] == "" and values['-AGE-'] != "" and values["-GENDER-"] not in gens:
+            usuario = 2
+        elif values['-AGE-'] == "" and values['-USERN-'] != "" and values["-GENDER-"] not in gens:
+            usuario = 3
+        elif values["-GENDER-"] not in gens and values['-USERN-'] != "" and values['-AGE-'] != "":
+            usuario = 4
+        elif values['-AGE-'] != "" and int(values['-AGE-']) not in range(2, 101):
+            usuario = 5
+        elif values['-USERN-'] == "" and values['-AGE-'] == "":
+            usuario = 6
+        elif values['-USERN-'] == "" and values["-GENDER-"] not in gens:
+            usuario = 7
+        elif values["-GENDER-"] == "" and values['-USERN-'] != "" and values['-AGE-'] != "":
+            usuario = 8
+        elif values['-USERN-'] == "" and values['-AGE-'] != "" and values["-GENDER-"] in gens:
+            usuario = 9
+
     return usuario
+
+
+def message_incorrect_data(message_number):
+    avisos = {
+                    1: "Campos vácios, ingrese sus datos",
+                    2: "Escriba un nombre de usuario",
+                    3: "Escriba su edad",
+                    4: "Elija un género valido",
+                    5: "Edad inválida",
+                    6: "Ingrese su edad y un nombre de usuario",
+                    7: "Género inválido, escriba un nombre de usuario",
+                    8: "Elija su género",
+                    9: "Escriba un nombre de usuario"
+            }
+    sg.Popup(avisos[message_number])

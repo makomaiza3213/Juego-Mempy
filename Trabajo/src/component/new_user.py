@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from src.handlers.scores import file_scores
+from src.handlers.sign_up import message_incorrect_data
 from src.windows import layout_sign_up as layout
 from src.component import menu_game, class_player
 from src.handlers import sign_up as sn
@@ -21,9 +22,10 @@ def loop():
         if event == sg.WIN_CLOSED:
             break
 
-        if event == "Guardar":
+        if event == "GUARDAR":
             sounds.play_sound("click.wav")
-            if sn.ok(values):
+            message_number = sn.ok(values)
+            if message_number not in range(1, 10):
                 if not path.exists("usuarios.json"):
                     usuario = sn.create_file_users(values)
                     player = class_player.Player(usuario)
@@ -36,7 +38,7 @@ def loop():
                 window.close()
                 menu_game.start(player, lista)
             else:
-                sg.popup("Complete todos los campos")
+                message_incorrect_data(message_number)
 
     return window
 

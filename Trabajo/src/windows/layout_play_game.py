@@ -58,5 +58,7 @@ def layout_level(player, filas, columnas, lista, aciertos):
                [sg.Text(f"✩{player.puntaje}", size=(20, 0), font=("Fixedsys", 25), key="-POINTS-")]]
 
     window = sg.Window(player.nick, layout, element_justification="center").finalize()
+
     window.Maximize()
+
     return window, matriz

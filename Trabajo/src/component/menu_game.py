@@ -27,24 +27,28 @@ def loop(player, lista):
             sounds.play_sound("click.wav")
             window.hide()
             play_game.start(player, lista)
+            window.Maximize()
             window.un_hide()
 
         elif event == "CONFIGURACION":
             sounds.play_sound("click.wav")
             window.hide()
             configurations.start(player, lista)
+            window.Maximize()
             window.un_hide()
 
         elif event == "PUNTUACIONES":
             sounds.play_sound("click.wav")
             window.hide()
             scores.start()
+            window.Maximize()
             window.un_hide()
 
         elif event == "ESTADISTICAS":
             sounds.play_sound("click.wav")
             window.hide()
             menu_statistics.start()
+            window.Maximize()
             window.un_hide()
 
         if event in (sg.WIN_CLOSED, 'SALIR DEL JUEGO'):

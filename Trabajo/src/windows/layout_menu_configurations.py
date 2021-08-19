@@ -35,4 +35,7 @@ def menu_configurations(player):
     layout_window = [
         [sg.Frame('Selecciona tu nivel', layout, font=('Fixedsys', 15), border_width=12, element_justification='center')]]
     window = sg.Window('Configuración', layout_window, element_justification='center').Finalize()
+
+    window.Maximize()
+
     return window

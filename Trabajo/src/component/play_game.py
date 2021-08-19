@@ -1,3 +1,4 @@
+import datetime
 import os
 
 import PySimpleGUI as sg
@@ -52,10 +53,11 @@ def loop(player, lista):
             if type(event) is tuple:
 
                 fila, colum, data = event
-                # window[(fila, colum, data)].update(data)
-                fileDir = os.path.dirname(os.path.realpath('__file__'))  # para las imagenes linea 57 58
-                # window[(fila, colum, data)].update(image_filename=os.path.join(fileDir, "src", "images", data))
-                window[(fila, colum, data)].update(image_filename=os.path.join(fileDir, "src", "images", data), image_size=(75, 75))
+                if datetime.datetime.today().weekday() != 2:
+                    window[(fila, colum, data)].update(data)
+                else:
+                    fileDir = os.path.dirname(os.path.realpath('__file__'))  # para las imagenes linea 57 58
+                    window[(fila, colum, data)].update(image_filename=os.path.join(fileDir, "src", "images", data), image_size=(75, 75))
                 window.refresh()
                 list_elems_touch = touch_controller((fila, colum, data), window, fin, min, sec, list_touchs, play_data, found_list, player, sec_cont, min_cont, file_plays)
                 list_touchs[0] = list_elems_touch[3][0]

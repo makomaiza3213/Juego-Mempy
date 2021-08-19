@@ -33,7 +33,9 @@ def create_csv(play_data):
         with open(filename, 'w', newline='') as csvfile:
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow(fields)
-            csvfile.close()
+            file_plays = csvfile
+            # csvfile.close()
+
     return file_plays
 
 

@@ -27,6 +27,8 @@ def table_scores(l1, l2, l3, l4):
                [sg.TabGroup([[sg.Tab('   NIVEL 3     ', tab3, font=("Fixedsys", 10)), sg.Tab('   NIVEL 4     ', tab4, font=("Fixedsys", 10))]])],
                [sg.Button("VOLVER AL MENÚ")]]
 
-    window = sg.Window('Table Simulation', tablero, font=("Fixedsys", 12), margins=(75, 50))
+    window = sg.Window('Table Simulation', tablero, font=("Fixedsys", 12)).finalize()
+
+    window.Maximize()
 
     return window

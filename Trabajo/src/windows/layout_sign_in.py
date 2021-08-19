@@ -10,21 +10,22 @@ def login():
     sg.theme('DarkAmber')
     logo = open_image("logo.png")
     layout_column = [
-                     #  key='-USERNAME-'
-                     # [sg.Text("", font=("Fixedsys", 50))],
-                     # [sg.Image("C:/Users/makom/Desktop/Facu 2021/PYTHON/Juego Mempy/Trabajo/src/images/mempy image logo 2.0.png")],
-                     [sg.Image(logo)],
-                     [sg.Text("INGRESAR", size=(8, 1), font=("Fixedsys", 20))],
+                     [sg.Text("", size=(0, 7))],
+                     [sg.Button(image_filename=logo, border_width=10, key="-LOGO-")],
+                     [sg.Text("", size=(0, 4))],
+                     [sg.Text("INGRESAR", font=("Fixedsys", 33))],
                      [sg.Text('USUARIO', font=("Fixedsys", 15))],
-                     [sg.InputText(size=(15, 1), font=("Fixedsys", 12), key='-IN-'), sg.Button('OK', bind_return_key=True, visible=False)],
-                     [sg.Button('ENTRAR', size=(10, 1), font=("Fixedsys", 12), border_width=5)],
+                     [sg.InputText(border_width=5, justification="center", size=(15, 4), font=("Fixedsys", 17), key='-IN-'), sg.Button('OK', bind_return_key=True, visible=False)],
+                     [sg.Button('ENTRAR', font=("Fixedsys", 17), border_width=8)],
                      [sg.Text("", size=(0, 1))],
-                     [sg.Text('¿ERES NUEVO?', font=("Fixedsys", 20))],
-                     [sg.Button('REGISTRATE', size=(10, 1), font=("Fixedsys", 12), border_width=5)],
-                     [sg.Text("", size=(0, 1))],
-                     [sg.Button(" SALIR ", font=("Fixedsys", 12), border_width=5, button_color=('black', 'red'))]
+                     [sg.Text('¿ERES NUEVO?', font=("Fixedsys", 25))],
+                     [sg.Button('REGISTRATE', font=("Fixedsys", 17), border_width=8)],
+                     [sg.Text("", size=(0, 4))],
+                     [sg.Button(" SALIR DEL JUEGO ", font=("Fixedsys", 17), border_width=8, button_color=('black', 'red'))]
                     ]
+# adaptar logo y achicar botones
+    window = sg.Window("Welcome!", layout_column, element_justification='center').finalize()
 
-    window = sg.Window("Welcome!", layout_column, element_justification='center', margins=(200, 150))
-    # window.Maximize()
+    window.Maximize()
+
     return window

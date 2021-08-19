@@ -11,13 +11,11 @@ def loop():
     """
     window = layout.login()
     sounds.play_sound('game music.wav')
-    event, values = window.read()
-    # keyboard.on_press_key("Intro", functionalities_enter(window, values))
+
     while True:
 
-        if event in (sg.WIN_CLOSED, ' SALIR '):
-            sounds.play_sound("click.wav")
-            break
+        event, values = window.read()
+
         if event == "ENTRAR" or event == "OK":
             functionalities_enter(window, values)
             break
@@ -25,6 +23,10 @@ def loop():
             sounds.play_sound('click.wav')
             window.close()
             new_user.start()
+            break
+
+        if event in (sg.WIN_CLOSED, ' SALIR DEL JUEGO '):
+            sounds.play_sound("click.wav")
             break
 
     return window
