@@ -1,0 +1,49 @@
+{
+    "usuarios": [
+        {
+            "nombre": "MARCOS",
+            "edad": "20",
+            "genero": "masculino",
+            "configuracion": {
+                "level1": {
+                    "dimensiones": {
+                        "x": 2,
+                        "y": 2
+                    },
+                    "coincidencias": 2,
+                    "tiempo_juego": 0
+                },
+                "level2": {
+                    "dimensiones": {
+                        "x": 3,
+                        "y": 2
+                    },
+                    "coincidencias": 2,
+                    "tiempo_juego": 0
+                },
+                "level3": {
+                    "dimensiones": {
+                        "x": 4,
+                        "y": 2
+                    },
+                    "coincidencias": 2,
+                    "tiempo_juego": 0
+                },
+                "level4": {
+                    "dimensiones": {
+                        "x": 2,
+                        "y": 2
+                    },
+                    "coincidencias": 2,
+                    "tiempo_juego": 1
+                },
+                "nivel_actual": "3",
+                "msj_victoria": "Ganaste!",
+                "msj_derrota": "Perdiste!",
+                "msj_tiempo": "Apurate!",
+                "ayuda": false,
+                "tema": "Topanga"
+            }
+        }
+    ]
+}
