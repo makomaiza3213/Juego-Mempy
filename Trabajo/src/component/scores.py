@@ -12,7 +12,7 @@ def score_table():
 
     event, values = window.read()
 
-    if event in "VOLVER AL MENÚ":
+    if event == "VOLVER AL MENÚ":
         window.close()
 
 

@@ -27,16 +27,16 @@ def loop(player, lista):
             sounds.play_sound("click.wav")
             if values['-LV4-']:
                 if cfg.verify(values):
-                    sg.Popup("Guardado")
+                    sg.Popup("Guardado", auto_close=True, auto_close_duration=2, font=("Fixedsys", 20))
                     cfg.save_config(player, values)
                 else:
-                    sg.popup("Elija valores permitidos")
+                    sg.popup("Configuración inválida, intente de nuevo", font=("Fixedsys", 20))
             else:
                 if cfg.verify_123(values):
                     cfg.save_config(player, values)
-                    sg.Popup("Guardado")
+                    sg.Popup("Guardado", auto_close=True, auto_close_duration=2, font=("Fixedsys", 20))
                 else:
-                    sg.popup("Elija valores permitidos")
+                    sg.popup("Configuración inválida, intente de nuevo", font=("Fixedsys", 20))
 
         if event == '-VOLVER-':
             sounds.play_sound("click.wav")

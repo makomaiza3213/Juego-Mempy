@@ -52,26 +52,54 @@ def previous_functionalities_starting_a_game(player, matriz, window, play_data, 
     return play_data, timer_running, file_plays
 
 
+def time_sleep(player):
+    if player.nivel_actual == "1":
+        time.sleep(1)
+    elif player.nivel_actual == "2":
+        time.sleep(2)
+    elif player.nivel_actual == "3":
+        time.sleep(2)
+    elif player.nivel_actual == "4":
+        if player.nivel["dimensiones"]["x"] * player.nivel["dimensiones"]["y"] == 16:
+            time.sleep(4)
+        elif player.nivel["dimensiones"]["x"] * player.nivel["dimensiones"]["y"] == 20:
+            time.sleep(5)
+        elif player.nivel["dimensiones"]["x"] * player.nivel["dimensiones"]["y"] == 24:
+            time.sleep(6)
+        elif player.nivel["dimensiones"]["x"] * player.nivel["dimensiones"]["y"] == 30:
+            time.sleep(8)
+
+
 def show_words(player, matriz, window):
     """
         Muestra todas las palabras del tablero antes de iniciar la partida
     """
+    list_buttons_colors = {"Black": 'blanco.png',
+                           "TealMono": "azul.png",
+                           "Topanga": "azul.png",
+                           "DarkGreen1": "verde.png"}
+
     for i in range(player.nivel["dimensiones"]["x"]):
         for j in range(player.nivel["dimensiones"]["y"]):
             if datetime.datetime.today().weekday() != 2:
-                window[(j, i, matriz[i][j])].update(matriz[i][j])
+                window[(j, i, matriz[i][j])].update(matriz[i][j], image_size=(150, 75),
+                                                    image_filename=open_image(list_buttons_colors[player.tema]))
+                # window[(j, i, matriz[i][j])].update(matriz[i][j])
             else:
                 window[(j, i, matriz[i][j])].update(image_filename=open_image(matriz[i][j]), image_size=(75, 75))
     window.refresh()
-    time.sleep(5)
+
+    time_sleep(player)
+
     for i in range(player.nivel["dimensiones"]["x"]):
         for j in range(player.nivel["dimensiones"]["y"]):
             if datetime.datetime.today().weekday() != 2:
-                window[(j, i, matriz[i][j])].update("?")
+                window[(j, i, matriz[i][j])].update("", image_size=(150, 75),
+                                                    image_filename=open_image("question.png"))
             else:
                 window[(j, i, matriz[i][j])].update(image_filename=open_image("question.png"), image_size=(75, 75))
 
-    window.refresh()
+    window.refresh() # volver a poner el signo de pregunta
 
 
 def playtime_features(timer_running, window, min, sec, sec_cont, min_cont, play_data, player, file_plays):
@@ -117,7 +145,11 @@ def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_co
             file_plays.close()
             update_scores(player)
             player.puntaje_0 = 0
-            sg.popup(player.msj_victoria, font=('Fixedsys', 15))
+            for x in range(3):
+                sg.popup(player.msj_victoria, title="VICTORIA!", font=('Fixedsys', 30), auto_close=True,
+                         auto_close_duration=1,
+                         no_titlebar=True, button_type=5)
+
     return list_elems_touch, fin, list_elements, timer_running
 
 
@@ -226,14 +258,14 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
     if (list_touchs[0] is not None and list_touchs[1] is not None and list_touchs[2] is not None) or (
             list_touchs[0] is not None and list_touchs[1] is not None and player.nivel["coincidencias"] == 2):
         if (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list) or (
-                list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list and list_touchs[2][
-            2] not in found_list):
+                list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list and
+                list_touchs[2][2] not in found_list):
             if (list_touchs[0] != list_touchs[1]) and (
                     list_touchs[1] != list_touchs[2] and list_touchs[0] != list_touchs[2]) or (
                     list_touchs[0] != list_touchs[1]) and (list_touchs[1] != list_touchs[2]):
                 if (list_touchs[0][2] == list_touchs[1][2] and player.nivel["coincidencias"] == 2) or (
-                        list_touchs[0][2] == list_touchs[1][2] == list_touchs[2][2] and player.nivel[
-                    "coincidencias"] == 3):
+                        list_touchs[0][2] == list_touchs[1][2] == list_touchs[2][2] and
+                        player.nivel["coincidencias"] == 3):
                     sounds.play_sound("pickup.wav")
                     file_plays = write_csv("intento_Ok", const, file_plays, "Ok", tupla[2])
                     fin += 1
@@ -256,12 +288,24 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
                             image_filename=os.path.join(fileDir, "src", "images", 'question.png'), image_size=(75, 75))
                         if player.nivel["coincidencias"] == 3:
                             window[list_touchs[2]].update(
-                                image_filename=os.path.join(fileDir, "src", "images", 'question.png'), image_size=(75, 75))
+                                image_filename=os.path.join(fileDir, "src", "images", 'question.png'),
+                                image_size=(75, 75))
                     else:
-                        window[list_touchs[0]].update('?')
-                        window[list_touchs[1]].update('?')
+                        fileDir = os.path.dirname(os.path.realpath('__file__'))
+                        window[list_touchs[0]].update(
+                            "",
+                            image_filename=os.path.join(fileDir, "src", "images", 'question.png'), image_size=(150, 75)
+                        )
+                        window[list_touchs[1]].update(
+                            "",
+                            image_filename=os.path.join(fileDir, "src", "images", 'question.png'), image_size=(150, 75)
+                        )
                         if player.nivel["coincidencias"] == 3:
-                            window[list_touchs[2]].update('?')
+                            window[list_touchs[2]].update(
+                                "",
+                                image_filename=os.path.join(fileDir, "src", "images", 'question.png'),
+                                image_size=(150, 75)
+                            )
                     list_touchs[0] = None
                     list_touchs[1] = None
                     list_touchs[2] = None

@@ -7,6 +7,10 @@ def list_images():
     path_files = os.listdir(path_files)
     path_files.remove("logo.png")
     path_files.remove("question.png")
+    path_files.remove("blanco.png")
+    path_files.remove("azul.png")
+    path_files.remove("verde.png")
+
     return path_files
 
 

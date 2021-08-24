@@ -11,15 +11,16 @@ def menu_statistics():
     sg.theme('DarkAmber')
     logo = open_image("logo.png")
     layout = [
-        [sg.Text("", size=(0, 7))],
+        [sg.Text("", size=(0, 2))],
         [sg.Button(image_filename=logo, border_width=10)],
         [sg.Text("", size=(0, 4))],
-        [sg.Button('TOP10', size=(31, 3), font=('Fixedsys', 12), border_width=5)],
-        [sg.Button('PARTIDAS POR ESTADO', size=(31, 3), font=('Fixedsys', 12), border_width=5)],
-        [sg.Button('PARTIDAS FINALIZADAS POR GENERO', size=(31, 3), font=('Fixedsys', 12), border_width=5)],
-        [sg.Button('PROMEDIO DE TIEMPO DE PARTIDAS FINALIZADAS POR NIVEL', size=(31, 3), font=('Fixedsys', 12),
-                   border_width=5)],
-        [sg.Button('SALIR', size=(31, 3), font=("Fixedsys", 12), button_color=('black', 'red'), border_width=5)]]
+        [sg.Button('TOP10', font=('Fixedsys', 25), border_width=10)],
+        [sg.Button('PARTIDAS POR ESTADO', font=('Fixedsys', 25), border_width=10)],
+        [sg.Button('PARTIDAS FINALIZADAS POR GENERO', font=('Fixedsys', 25), border_width=10)],
+        [sg.Button('PROMEDIO DE TIEMPO DE PARTIDAS FINALIZADAS POR NIVEL', font=('Fixedsys', 25),
+                   border_width=10)],
+        [sg.Text("", size=(0, 3))],
+        [sg.Button('VOLVER AL MENÚ', font=("Fixedsys", 20), button_color=('black', 'red'), border_width=10)]]
     window_menu = sg.Window('Menú de las estadisticas', layout, element_justification="center").finalize()
 
     window_menu.Maximize()

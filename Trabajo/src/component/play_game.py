@@ -53,8 +53,14 @@ def loop(player, lista):
             if type(event) is tuple:
 
                 fila, colum, data = event
+                list_buttons_colors = {"Black": 'blanco.png',
+                                       "TealMono": "azul.png",
+                                       "Topanga": "azul.png",
+                                       "DarkGreen1": "verde.png"}
                 if datetime.datetime.today().weekday() != 2:
-                    window[(fila, colum, data)].update(data)
+                    fileDir = os.path.dirname(os.path.realpath('__file__'))
+                    window[(fila, colum, data)].update(data, image_size=(150, 75),
+                                                       image_filename=os.path.join(fileDir, "src", "images", list_buttons_colors[player.tema]))
                 else:
                     fileDir = os.path.dirname(os.path.realpath('__file__'))  # para las imagenes linea 57 58
                     window[(fila, colum, data)].update(image_filename=os.path.join(fileDir, "src", "images", data), image_size=(75, 75))

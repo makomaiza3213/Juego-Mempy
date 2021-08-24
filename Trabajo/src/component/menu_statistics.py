@@ -43,7 +43,7 @@ def loop():
             window.Maximize()
             window.un_hide()
 
-        if event in (sg.WIN_CLOSED, 'SALIR'):
+        if event in (sg.WIN_CLOSED, 'VOLVER AL MENÚ'):
             sounds.play_sound("click.wav")
             break    
    
