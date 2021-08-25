@@ -19,6 +19,7 @@ def loop(player, lista):
 
     window, matriz = layout_play_game.layout_level(player, list_elements[0], list_elements[1], list_elements[3],
                                                    list_elements[4])
+
     while True:
         event, values = window.read()
         try:

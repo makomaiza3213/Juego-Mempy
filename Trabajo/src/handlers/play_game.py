@@ -84,7 +84,6 @@ def show_words(player, matriz, window):
             if datetime.datetime.today().weekday() != 2:
                 window[(j, i, matriz[i][j])].update(matriz[i][j], image_size=(150, 75),
                                                     image_filename=open_image(list_buttons_colors[player.tema]))
-                # window[(j, i, matriz[i][j])].update(matriz[i][j])
             else:
                 window[(j, i, matriz[i][j])].update(image_filename=open_image(matriz[i][j]), image_size=(75, 75))
     window.refresh()
@@ -99,7 +98,7 @@ def show_words(player, matriz, window):
             else:
                 window[(j, i, matriz[i][j])].update(image_filename=open_image("question.png"), image_size=(75, 75))
 
-    window.refresh() # volver a poner el signo de pregunta
+    window.refresh()
 
 
 def playtime_features(timer_running, window, min, sec, sec_cont, min_cont, play_data, player, file_plays):
@@ -112,7 +111,7 @@ def playtime_features(timer_running, window, min, sec, sec_cont, min_cont, play_
         timer_running = False
         file_plays = write_csv("fin", play_data, file_plays, "timeout")
         file_plays.close()
-        sg.Popup(player.msj_derrota)
+        popup_victory_defeat(player, player.msj_derrota)
 
     if sec == 0:
         min -= 1
@@ -145,12 +144,22 @@ def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_co
             file_plays.close()
             update_scores(player)
             player.puntaje_0 = 0
-            for x in range(3):
-                sg.popup(player.msj_victoria, title="VICTORIA!", font=('Fixedsys', 30), auto_close=True,
-                         auto_close_duration=1,
-                         no_titlebar=True, button_type=5)
+            popup_victory_defeat(player, player.msj_victoria)
 
     return list_elems_touch, fin, list_elements, timer_running
+
+
+def popup_victory_defeat(player, msj):
+    color_background_text = {"Black": ('black', 'white'),
+                           "TealMono": ("white", "#193b4b"),
+                           "Topanga": ("#fce896", "#193b4b"),
+                           "DarkGreen1": ("#fce896", "#1e641d")}
+
+    for x in range(3):
+        sg.popup(msj, title="VICTORIA!", font=('Fixedsys', 30), auto_close=True,
+                 auto_close_duration=1, background_color=color_background_text[player.tema][1],
+                 text_color=color_background_text[player.tema][0],
+                 location=(650, 650), no_titlebar=True, button_type=5)
 
 
 def update_score_by_game(player, sec, min):
@@ -257,7 +266,7 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
 
     if (list_touchs[0] is not None and list_touchs[1] is not None and list_touchs[2] is not None) or (
             list_touchs[0] is not None and list_touchs[1] is not None and player.nivel["coincidencias"] == 2):
-        if (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list) or (
+        if (list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list and player.nivel["coincidencias"] == 2) or (
                 list_touchs[0][2] not in found_list and list_touchs[1][2] not in found_list and
                 list_touchs[2][2] not in found_list):
             if (list_touchs[0] != list_touchs[1]) and (

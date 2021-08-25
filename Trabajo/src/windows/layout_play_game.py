@@ -59,7 +59,7 @@ def layout_level(player, filas, columnas, lista, aciertos):
                [sg.Text("", size=(8, 0), font=('Fixedsys', 22), text_color="red", key="-ALERTIME-")],
                [sg.Text(f"✩{player.puntaje}", size=(20, 0), font=("Fixedsys", 35), key="-POINTS-")]]
 
-    window = sg.Window(player.nick, layout, element_justification="center", font=('Fixedsys', 5)).finalize()
+    window = sg.Window(player.nick, layout, element_justification="center", font=('Fixedsys', 15)).finalize()
 
     window.Maximize()
 
