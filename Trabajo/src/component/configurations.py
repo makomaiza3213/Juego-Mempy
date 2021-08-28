@@ -24,7 +24,7 @@ def loop(player, lista):
             break
 
         if event == '-GUARDAR-':
-            sounds.play_sound("click.wav")
+            sounds.play_sound("click2.wav")
             if values['-LV4-']:
                 if cfg.verify(values):
                     sg.Popup("Guardado", auto_close=True, auto_close_duration=2, font=("Fixedsys", 20))
@@ -39,7 +39,7 @@ def loop(player, lista):
                     sg.popup("Configuración inválida, intente de nuevo", font=("Fixedsys", 20))
 
         if event == '-VOLVER-':
-            sounds.play_sound("click.wav")
+            sounds.play_sound("click2.wav")
             break
 
     return window

@@ -2,6 +2,8 @@ import datetime
 import os
 
 import PySimpleGUI as sg
+import pygame.mixer
+
 from src.handlers.write import write_csv
 from src.handlers.play_game import \
     previous_functionalities_starting_a_game, pre_initializations_for_the_component, playtime_features, verify_winner, \
@@ -24,14 +26,15 @@ def loop(player, lista):
         event, values = window.read()
         try:
             if event in 'INICIAR':
-                sounds.play_sound("click.wav")
+                sounds.play_sound("click2.wav")
                 play_data, timer_running, file_plays = previous_functionalities_starting_a_game(player, matriz, window, play_data, timer_running)
                 break
         except TypeError:
             print("Presione INICIAR para jugar")
 
         if event in (sg.WIN_CLOSED, 'SALIR'):
-            sounds.play_sound("click.wav")
+            pygame.mixer.stop()
+            sounds.play_sound("click2.wav")
             window.close()
             break
 
@@ -40,7 +43,7 @@ def loop(player, lista):
             event, values = window.read(timeout=1000)
 
             if event in (sg.WIN_CLOSED, 'SALIR'):
-                sounds.play_sound("click.wav")
+                sounds.play_sound("click2.wav")
                 window_warning = layout_play_game.warning()
                 event, values = window_warning.read()
                 if event == "SI":
@@ -52,7 +55,7 @@ def loop(player, lista):
                     window_warning.close()
 
             if type(event) is tuple:
-
+                sounds.play_sound("card.wav")
                 fila, colum, data = event
                 list_buttons_colors = {"Black": 'blanco.png',
                                        "TealMono": "azul.png",
@@ -89,5 +92,6 @@ def start(player, lista):
     """
         Lanza la ejecución de la ventana de juego y su posterior cierre
     """
+    #sounds.play_sound("music8.wav")
     window_game = loop(player, lista)
     window_game.close()

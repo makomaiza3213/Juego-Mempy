@@ -20,13 +20,13 @@ def loop():
             functionalities_enter(window, values)
             break
         if event == "REGISTRATE":
-            sounds.play_sound('click.wav')
+            sounds.play_sound('click2.wav')
             window.close()
             new_user.start()
             break
 
         if event in (sg.WIN_CLOSED, ' SALIR DEL JUEGO '):
-            sounds.play_sound("click.wav")
+            sounds.play_sound("click2.wav")
             break
 
     return window

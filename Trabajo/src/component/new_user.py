@@ -23,7 +23,7 @@ def loop():
             break
 
         if event == "GUARDAR":
-            sounds.play_sound("click.wav")
+            sounds.play_sound("click2.wav")
             message_number = sn.ok(values)
             if message_number not in range(1, 10):
                 if not path.exists("usuarios.json"):

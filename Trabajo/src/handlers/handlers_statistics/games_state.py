@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+
+from src.handlers import sounds
 from src.windows import layout_statistics as layout
 from matplotlib import pyplot as plt
 import PySimpleGUI as sg
@@ -53,6 +55,7 @@ def state():
     while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == 'Salir':
+            sounds.play_sound("click2.wav")
             plt.clf()
             plt.close()
             break

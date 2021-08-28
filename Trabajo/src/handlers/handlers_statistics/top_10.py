@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from src.windows.layout_statistics import layout_top_10
 from src.handlers import sounds 
+import PySimpleGUI as sg
 
 
 def obtener_datos():
@@ -16,8 +17,8 @@ def obtener_datos():
 
     window = layout_top_10(list(top10_serie.index.values))
     event, values = window.read()
-    if event == "Salir":
-        sounds.play_sound("click.wav")
+    if event == "Salir" or event == sg.WIN_CLOSED:
+        sounds.play_sound("click2.wav")
         window.close()
   
     

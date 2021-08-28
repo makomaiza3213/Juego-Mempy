@@ -16,35 +16,35 @@ def loop():
         event, values = window.read()
         
         if event == "TOP10":
-            sounds.play_sound("click.wav")
+            sounds.play_sound("click2.wav")
             window.hide()
             top_10.obtener_datos()
             window.Maximize()
             window.un_hide()
         
         elif event == "PARTIDAS POR ESTADO":
-            sounds.play_sound("click.wav")
+            sounds.play_sound("click2.wav")
             window.hide()
             games_state.state()
             window.Maximize()
             window.un_hide()
 
         elif event == "PARTIDAS FINALIZADAS POR GENERO":
-            sounds.play_sound("click.wav")
+            sounds.play_sound("click2.wav")
             window.hide()
             game_by_gender.percentage_by_gender()
             window.Maximize()
             window.un_hide()
         
         elif event == "PROMEDIO DE TIEMPO DE PARTIDAS FINALIZADAS POR NIVEL":
-            sounds.play_sound("click.wav")
+            sounds.play_sound("click2.wav")
             window.hide()
             average_time.percentage_by_nivel()
             window.Maximize()
             window.un_hide()
 
         if event in (sg.WIN_CLOSED, 'VOLVER AL MENÚ'):
-            sounds.play_sound("click.wav")
+            sounds.play_sound("click2.wav")
             break    
    
     return window

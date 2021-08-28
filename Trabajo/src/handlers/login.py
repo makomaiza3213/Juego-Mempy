@@ -28,7 +28,7 @@ def functionalities_enter(window, values):
         creación del archivo  json de puntuaciones
     """
     # window.close()
-    sounds.play_sound('click.wav')
+    sounds.play_sound('click2.wav')
     if os.path.exists("usuarios.json"):
         usuario = buscar(values['-IN-'])
         if usuario:

@@ -1,6 +1,8 @@
 import datetime
 import os
 
+import pygame
+
 from src.handlers.images import open_image
 from src.handlers.write import write_csv, create_csv
 from src.handlers import sounds
@@ -111,6 +113,7 @@ def playtime_features(timer_running, window, min, sec, sec_cont, min_cont, play_
         timer_running = False
         file_plays = write_csv("fin", play_data, file_plays, "timeout")
         file_plays.close()
+        sounds.play_sound("defeat2.wav")
         popup_victory_defeat(player, player.msj_derrota)
 
     if sec == 0:
@@ -139,7 +142,9 @@ def verify_winner(list_elems_touch, fin, list_elements, player, sec_cont, min_co
     if list_elems_touch is not None:
         if fin == list_elements[4]:  # comprobar si ganaste
             timer_running = False
-            sounds.play_sound('victory.wav')
+            pygame.mixer.pause()
+            sounds.play_sound('correct.wav')
+            pygame.mixer.unpause()
             file_plays = write_csv("fin", play_data, file_plays, "finalizada", "", player.puntaje)
             file_plays.close()
             update_scores(player)
@@ -275,7 +280,7 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
                 if (list_touchs[0][2] == list_touchs[1][2] and player.nivel["coincidencias"] == 2) or (
                         list_touchs[0][2] == list_touchs[1][2] == list_touchs[2][2] and
                         player.nivel["coincidencias"] == 3):
-                    sounds.play_sound("pickup.wav")
+                    sounds.play_sound("ok.wav")
                     file_plays = write_csv("intento_Ok", const, file_plays, "Ok", tupla[2])
                     fin += 1
                     found_list.append(list_touchs[0][2])
@@ -285,7 +290,7 @@ def touch_controller(tupla, window, fin, min, sec, list_touchs, const, found_lis
                     list_touchs[1] = None
                     list_touchs[2] = None
                 else:
-                    sounds.play_sound("broken.wav")
+                    sounds.play_sound("error.wav")
                     file_plays = write_csv("intento_Error", const, file_plays, "Error", tupla[2])
                     time.sleep(1)
                     sec -= 1

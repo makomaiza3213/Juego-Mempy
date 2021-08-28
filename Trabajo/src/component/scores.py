@@ -1,3 +1,4 @@
+from src.handlers import sounds
 from src.handlers.scores import new_lists_with_corresponding_scores
 from src.windows import layout_scores
 
@@ -13,6 +14,7 @@ def score_table():
     event, values = window.read()
 
     if event == "VOLVER AL MENÚ":
+        sounds.play_sound("click2.wav")
         window.close()
 
 
