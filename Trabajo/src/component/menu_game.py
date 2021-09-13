@@ -26,12 +26,9 @@ def loop(player, lista):
         event, values = window.read()
 
         if event == "JUGAR":
-            #sounds.play_sound("click2.wav")
-            window.hide()
-            #pygame.mixer.stop()
             sounds.play_sound("click2.wav")
+            window.hide()
             play_game.start(player, lista)
-            #sounds.play_sound("game music.wav")
             window.Maximize()
             window.un_hide()
 

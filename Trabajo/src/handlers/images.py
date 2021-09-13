@@ -10,6 +10,7 @@ def list_images():
     path_files.remove("blanco.png")
     path_files.remove("azul.png")
     path_files.remove("verde.png")
+    path_files.remove("check.png")
 
     return path_files
 

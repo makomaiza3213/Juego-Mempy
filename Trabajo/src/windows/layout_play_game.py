@@ -24,7 +24,9 @@ def layout_level(player, filas, columnas, lista, aciertos):
 
     layout = [
         [sg.Text(player.nick, font=("Fixedsys", 35))],
-        [sg.Text(f"NIVEL {player.nivel_actual}", font=("Fixedsys", 25)), sg.Text(f"    ACIERTOS 0/{aciertos}", font=('Fixedsys', 25), key="-HITS-")]]
+        [sg.Text(f"NIVEL {player.nivel_actual}   ", font=("Fixedsys", 25)),
+         sg.Image(filename=open_image("check.png")),
+         sg.Text(f"0/{aciertos}", font=('Fixedsys', 25), key="-HITS-", size=(30, 0))]]
 
     matriz = []
     board = []

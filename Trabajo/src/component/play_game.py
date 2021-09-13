@@ -33,7 +33,6 @@ def loop(player, lista):
             print("Presione INICIAR para jugar")
 
         if event in (sg.WIN_CLOSED, 'SALIR'):
-            pygame.mixer.stop()
             sounds.play_sound("click2.wav")
             window.close()
             break
@@ -92,6 +91,5 @@ def start(player, lista):
     """
         Lanza la ejecución de la ventana de juego y su posterior cierre
     """
-    #sounds.play_sound("music8.wav")
     window_game = loop(player, lista)
     window_game.close()

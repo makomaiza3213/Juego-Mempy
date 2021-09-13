@@ -51,6 +51,7 @@ def previous_functionalities_starting_a_game(player, matriz, window, play_data, 
     file_plays = create_csv(play_data)
     file_plays = write_csv("inicio_partida", play_data, file_plays)
     player.puntaje_0 = 0
+    window["-POINTS-"].update(f"✩ {0}")
     return play_data, timer_running, file_plays
 
 
